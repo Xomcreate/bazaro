@@ -10,7 +10,7 @@ const categoryTiles = [
     textColor: 'text-white',
     link: '/categories/electronics',
     imageAlt: 'Category for Electronics',
-    imageUrl: 'https://via.placeholder.com/150/5C6BC0/FFFFFF?text=Electronics' // Placeholder image
+    imageUrl: 'https://images.unsplash.com/photo-1760520338238-4137dd2dc28f?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTR8fHNtYXJ0JTIwZGV2aWNlc3xlbnwwfHwwfHx8MA%3D%3D' // Placeholder image
   },
   {
     title: 'Fashion',
@@ -20,7 +20,7 @@ const categoryTiles = [
     textColor: 'text-white',
     link: '/categories/fashion',
     imageAlt: 'Category for Fashion',
-    imageUrl: 'https://via.placeholder.com/150/EC407A/FFFFFF?text=Fashion' // Placeholder image
+    imageUrl: 'https://images.unsplash.com/photo-1483985988355-763728e1935b?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8M3x8ZmFzaGlvbnxlbnwwfHwwfHx8MA%3D%3D' // Placeholder image
   },
   {
     title: 'Home & Office',
@@ -30,7 +30,7 @@ const categoryTiles = [
     textColor: 'text-gray-900',
     link: '/categories/home',
     imageAlt: 'Category for Home & Office',
-    imageUrl: 'https://via.placeholder.com/150/66BB6A/FFFFFF?text=Home' // Placeholder image
+    imageUrl: 'https://images.unsplash.com/photo-1598928506311-c55ded91a20c?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Nnx8bGl2aW5nJTIwcm9vbXxlbnwwfHwwfHx8MA%3D%3D' // Placeholder image
   },
   {
     title: 'Health & Beauty',
@@ -40,7 +40,7 @@ const categoryTiles = [
     textColor: 'text-white',
     link: '/categories/beauty',
     imageAlt: 'Category for Health & Beauty',
-    imageUrl: 'https://via.placeholder.com/150/EF5350/FFFFFF?text=Beauty' // Placeholder image
+    imageUrl: 'https://media.istockphoto.com/id/2196084933/photo/young-woman-applying-facial-serum-in-a-modern-bathroom.webp?a=1&b=1&s=612x612&w=0&k=20&c=d2njFh9cEU0KWXywOQ57nn7sAGtyHFdDAeDXLnaF084=' // Placeholder image
   },
   {
     title: 'Sporting Goods',
@@ -50,7 +50,7 @@ const categoryTiles = [
     textColor: 'text-gray-900',
     link: '/categories/sports',
     imageAlt: 'Category for Sporting Goods',
-    imageUrl: 'https://via.placeholder.com/150/FFCA28/FFFFFF?text=Sports' // Placeholder image
+    imageUrl: 'https://plus.unsplash.com/premium_photo-1670505062582-fdaa83c23c9e?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTN8fGd5bXxlbnwwfHwwfHx8MA%3D%3D' // Placeholder image
   },
   {
     title: 'Automotive',
@@ -60,7 +60,7 @@ const categoryTiles = [
     textColor: 'text-yellow-400',
     link: '/categories/automotive',
     imageAlt: 'Category for Automotive',
-    imageUrl: 'https://via.placeholder.com/150/424242/FFEB3B?text=Auto' // Placeholder image
+    imageUrl: 'https://media.istockphoto.com/id/2205376620/photo/a-lot-of-cars-in-a-rows-used-car-sales.webp?a=1&b=1&s=612x612&w=0&k=20&c=qe_h_QK8gSPUlJM59kkYt08fQ67KpBuTfZZZFmxvWnw=' // Placeholder image
   },
   {
     title: 'Kids & Toys',
@@ -70,7 +70,7 @@ const categoryTiles = [
     textColor: 'text-gray-900',
     link: '/categories/toys',
     imageAlt: 'Category for Kids & Toys',
-    imageUrl: 'https://via.placeholder.com/150/26C6DA/FFFFFF?text=Kids' // Placeholder image
+    imageUrl: 'https://plus.unsplash.com/premium_photo-1702830269669-17de421dfdf7?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MXx8a2lkcyUyNnRveXN8ZW58MHx8MHx8fDA%3D' // Placeholder image
   },
   {
     title: 'Groceries',
@@ -80,7 +80,7 @@ const categoryTiles = [
     textColor: 'text-white',
     link: '/categories/groceries',
     imageAlt: 'Category for Groceries',
-    imageUrl: 'https://via.placeholder.com/150/AFB42B/FFFFFF?text=Groceries' // Placeholder image
+    imageUrl: 'https://media.istockphoto.com/id/617759204/photo/steakhouse-double-bacon-cheeseburger.webp?a=1&b=1&s=612x612&w=0&k=20&c=ClO9FRiWvSfMothhoVfcdcB7CUsUPWSa-0wf38U7h3E=' // Placeholder image
   },
   { // New Category 9
     title: 'Books & Media',
@@ -90,7 +90,7 @@ const categoryTiles = [
     textColor: 'text-white',
     link: '/categories/books',
     imageAlt: 'Category for Books & Media',
-    imageUrl: 'https://via.placeholder.com/150/3F51B5/FFFFFF?text=Books' // Placeholder image
+    imageUrl: 'https://images.unsplash.com/photo-1604866830893-c13cafa515d5?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8M3x8Ym9va3N8ZW58MHx8MHx8fDA%3D' // Placeholder image
   },
   { // New Category 10
     title: 'Pet Supplies',
@@ -100,7 +100,7 @@ const categoryTiles = [
     textColor: 'text-gray-900',
     link: '/categories/pets',
     imageAlt: 'Category for Pet Supplies',
-    imageUrl: 'https://via.placeholder.com/150/FFB300/FFFFFF?text=Pets' // Placeholder image
+    imageUrl: 'https://images.unsplash.com/photo-1548199973-03cce0bbc87b?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTR8fGRvZ3xlbnwwfHwwfHx8MA%3D%3D' // Placeholder image
   },
   { // New Category 11
     title: 'Art & Craft',
@@ -110,7 +110,7 @@ const categoryTiles = [
     textColor: 'text-white',
     link: '/categories/art-craft',
     imageAlt: 'Category for Art & Craft',
-    imageUrl: 'https://via.placeholder.com/150/7B1FA2/FFFFFF?text=Crafts' // Placeholder image
+    imageUrl: 'https://plus.unsplash.com/premium_photo-1714060722867-5772a73f1f2f?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTN8fGFydHMlMjAlMjYlMjBjcmFmdHxlbnwwfHwwfHx8MA%3D%3D' // Placeholder image
   },
   { // New Category 12
     title: 'Garden & Outdoor',
@@ -120,7 +120,7 @@ const categoryTiles = [
     textColor: 'text-white',
     link: '/categories/garden',
     imageAlt: 'Category for Garden & Outdoor',
-    imageUrl: 'https://via.placeholder.com/150/00897B/FFFFFF?text=Garden' // Placeholder image
+    imageUrl: 'https://plus.unsplash.com/premium_photo-1678836292789-6bb8d1f14a43?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTN8fGdhcmRlbiUyMGFuZCUyMG91dGRvb3J8ZW58MHx8MHx8fDA%3D' // Placeholder image
   },
 ];
 

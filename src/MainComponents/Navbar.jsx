@@ -12,7 +12,6 @@ export default function Navbar() {
     services: false,
     sell: false,
     account: false,
-    shop: false, // new Shop dropdown
   });
 
   const headerRef = useRef(null);
@@ -34,7 +33,6 @@ export default function Navbar() {
           services: false,
           sell: false,
           account: false,
-          shop: false,
         });
       }
     }
@@ -61,7 +59,6 @@ export default function Navbar() {
       services: false,
       sell: false,
       account: false,
-      shop: false,
     });
   };
 
@@ -81,7 +78,6 @@ export default function Navbar() {
 
   const services = ["Delivery", "Installation", "Warranty Services"];
   const sell = ["How to Sell", "Seller Dashboard", "Pricing Plans"];
-  const shopItems = ["All Shops", "Featured Shops", "New Shops", "Top Rated Shops"];
 
   return (
     <header ref={headerRef} className="w-full shadow-md">
@@ -141,42 +137,8 @@ export default function Navbar() {
           {/* Marketplace link */}
           <Link to="/marketplace" className="hover:text-black transition">Marketplace</Link>
 
-          {/* Shop Dropdown */}
-          <div
-            className="relative"
-            onMouseEnter={() => {
-              clearAllHoverTimeouts();
-              setDropdowns((prev) => ({ ...prev, shop: true }));
-            }}
-            onMouseLeave={() => {
-              hoverTimeoutRef.current.shop = setTimeout(() => {
-                setDropdowns((prev) => ({ ...prev, shop: false }));
-                delete hoverTimeoutRef.current.shop;
-              }, 150);
-            }}
-          >
-            <button
-              className="hover:text-black transition"
-              onClick={() => handleToggle("shop")}
-              aria-expanded={dropdowns.shop}
-            >
-              Shop ▼
-            </button>
-            {dropdowns.shop && (
-              <div className="absolute top-full left-0 mt-2 bg-white text-black rounded shadow-lg w-56 z-50 text-center">
-                {shopItems.map((item, i) => (
-                  <Link
-                    key={i}
-                    to={`/shop/${item.toLowerCase().replace(/\s+/g, "-")}`}
-                    className="block px-4 py-2 hover:bg-gray-100 transition"
-                    onClick={closeAll}
-                  >
-                    {item}
-                  </Link>
-                ))}
-              </div>
-            )}
-          </div>
+          {/* Shop as a simple link (no dropdown) */}
+          <Link to="/shops" className="hover:text-black transition">Shop</Link>
 
           {/* Services Dropdown */}
           <div
@@ -318,7 +280,6 @@ export default function Navbar() {
               services: false,
               sell: false,
               account: false,
-              shop: false,
             });
           }}
         >
@@ -363,30 +324,8 @@ export default function Navbar() {
           {/* Marketplace */}
           <Link to="/marketplace" className="hover:text-black transition w-full text-center" onClick={() => setMobileMenuOpen(false)}>Marketplace</Link>
 
-          {/* Shop */}
-          <div className="relative w-full">
-            <button
-              onClick={() => handleToggle("shop")}
-              className="w-full text-center hover:text-black transition px-4 py-2"
-              aria-expanded={dropdowns.shop}
-            >
-              Shop ▼
-            </button>
-            {dropdowns.shop && (
-              <div className="absolute left-0 top-full bg-white text-black rounded shadow-lg w-full z-50 text-center">
-                {shopItems.map((it, i) => (
-                  <Link
-                    key={i}
-                    to={`/shop/${it.toLowerCase().replace(/\s+/g, "-")}`}
-                    className="block px-4 py-2 hover:bg-gray-100 transition text-center"
-                    onClick={() => setMobileMenuOpen(false)}
-                  >
-                    {it}
-                  </Link>
-                ))}
-              </div>
-            )}
-          </div>
+          {/* Shop as a simple link (no dropdown) */}
+          <Link to="/shops" className="hover:text-black transition w-full text-center" onClick={() => setMobileMenuOpen(false)}>Shop</Link>
 
           {/* Services */}
           <div className="relative w-full">
