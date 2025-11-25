@@ -8,8 +8,9 @@ import Home from './MainComponents/Home';
 import Contact from './MainComponents/Contact';
 import Loading from './MainComponents/Loading'; // Button-based loading screen
 import Categories from './MainComponents/Categories';
-import CategoryPage from './MainComponents/CategoryPage';
 import MarketPlace from './MainComponents/MarketPlace';
+import Footer from './MainComponents/Footer';
+import Shop from './MainComponents/Shop';
 // import Marketplace from './MainComponents/Marketplace';
 
 function App() {
@@ -29,11 +30,12 @@ function App() {
         <Route path="/" element={<Home />} />
         <Route path="/contact" element={<Contact />} />
           <Route path="/marketplace" element={<MarketPlace />} />
+           <Route path="/shop" element={<Shop />} />
          <Route path="/categories" element={<Categories />} />
-         <Route path="/categories/:slug" element={<CategoryPage/>} />
         {/* Example for future routes */}
         {/* <Route path="/marketplace" element={<Marketplace />} /> */}
       </Routes>
+      <Footer/>
     </>
   );
 }
