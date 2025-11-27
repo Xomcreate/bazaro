@@ -11,6 +11,11 @@ import Categories from './MainComponents/Categories';
 import MarketPlace from './MainComponents/MarketPlace';
 import Footer from './MainComponents/Footer';
 import Shop from './MainComponents/Shop';
+import Sell from './MainComponents/Sell';
+import Services from './MainComponents/Services';
+import Register from './MainComponents/Register';
+import Login from './MainComponents/Login';
+
 // import Marketplace from './MainComponents/Marketplace';
 
 function App() {
@@ -32,6 +37,10 @@ function App() {
           <Route path="/marketplace" element={<MarketPlace />} />
            <Route path="/shop" element={<Shop />} />
          <Route path="/categories" element={<Categories />} />
+          <Route path="/sell" element={<Sell />} />
+          <Route path="/service" element={<Services/>} />
+           <Route path="/register" element={<Register/>} />
+             <Route path="/login" element={<Login/>} />
         {/* Example for future routes */}
         {/* <Route path="/marketplace" element={<Marketplace />} /> */}
       </Routes>

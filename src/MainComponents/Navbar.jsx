@@ -39,7 +39,7 @@ export default function Navbar() {
           <Link to="/categories" className="hover:text-black transition">Categories</Link>
           <Link to="/marketplace" className="hover:text-black transition">Marketplace</Link>
           <Link to="/shop" className="hover:text-black transition">Shop</Link>
-          <Link to="/services" className="hover:text-black transition">Services</Link>
+          <Link to="/service" className="hover:text-black transition">Services</Link>
           <Link to="/sell" className="hover:text-black transition">Sell on Bazaro</Link>
           <Link to="/contact" className="hover:text-black transition">Contact</Link>
         </nav>
@@ -76,7 +76,7 @@ export default function Navbar() {
               aria-expanded={dropdowns.account}
             >
               <FaUser size={14} /> Account ▼
-            </button>
+/            </button>
             {dropdowns.account && (
               <div className="absolute right-0 mt-2 bg-white text-black rounded shadow-lg w-48 z-50 text-center">
                 <Link to="/login" className="block px-4 py-2 hover:bg-gray-100 transition">Login</Link>
@@ -109,7 +109,7 @@ export default function Navbar() {
           <Link to="/categories" className="hover:text-black transition w-full text-center" onClick={() => setMobileMenuOpen(false)}>Categories</Link>
           <Link to="/marketplace" className="hover:text-black transition w-full text-center" onClick={() => setMobileMenuOpen(false)}>Marketplace</Link>
           <Link to="/shop" className="hover:text-black transition w-full text-center" onClick={() => setMobileMenuOpen(false)}>Shop</Link>
-          <Link to="/services" className="hover:text-black transition w-full text-center" onClick={() => setMobileMenuOpen(false)}>Services</Link>
+          <Link to="/service" className="hover:text-black transition w-full text-center" onClick={() => setMobileMenuOpen(false)}>Services</Link>
           <Link to="/sell" className="hover:text-black transition w-full text-center" onClick={() => setMobileMenuOpen(false)}>Sell on Bazaro</Link>
           <Link to="/contact" className="hover:text-black transition w-full text-center mt-2" onClick={() => setMobileMenuOpen(false)}>Contact</Link>
 
