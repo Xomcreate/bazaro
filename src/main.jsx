@@ -15,6 +15,14 @@ import Sell from './MainComponents/Sell';
 import Services from './MainComponents/Services';
 import Register from './MainComponents/Register';
 import Login from './MainComponents/Login';
+import About from './MainComponents/About';
+import Career from './MainComponents/Career';
+import Terms from './MainComponents/Terms';
+import Policy from './MainComponents/Policy';
+import Orders from './MainComponents/Orders';
+import TrackOrders from './MainComponents/TrackOrders';
+import Wishlist from './MainComponents/Wishlist';
+import Admin from './DashboardComponets/Admin';
 
 // import Marketplace from './MainComponents/Marketplace';
 
@@ -40,7 +48,16 @@ function App() {
           <Route path="/sell" element={<Sell />} />
           <Route path="/service" element={<Services/>} />
            <Route path="/register" element={<Register/>} />
+             <Route path="/about" element={<About/>} />
              <Route path="/login" element={<Login/>} />
+               <Route path="/careers" element={<Career/>} />
+               <Route path="/terms" element={<Terms/>} />
+                <Route path="/privacy" element={<Policy/>} />
+                 <Route path="/orders" element={<Orders/>} />
+                  <Route path="/track-order" element={<TrackOrders/>} />
+                   <Route path="/wishlist" element={<Wishlist/>} />
+                  <Route path="/admin" element={<Admin/>} />
+                
         {/* Example for future routes */}
         {/* <Route path="/marketplace" element={<Marketplace />} /> */}
       </Routes>

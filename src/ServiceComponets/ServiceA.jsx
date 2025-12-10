@@ -46,7 +46,7 @@ function ServiceA() {
             lineHeight: '1.5',
           }}
         >
-          Everything you need to **buy, sell, and grow** your business on Bazaro.
+          Everything you need to buy, sell, and grow your business on Bazaro.
         </p>
         
         {/* === Call to Action Button === */}
