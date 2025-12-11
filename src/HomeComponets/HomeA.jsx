@@ -16,9 +16,9 @@ const CATEGORIES = [
 ];
 
 const SLIDES = [
-  { url: "/Images/lol2.jpeg", title: "Big Tech Sale", subtitle: "Up to 50% off Laptops & Phones" },
-  { url: "/Images/lol1.jpeg", title: "Weekend Awoof Deals", subtitle: "Limited time flash sales, don't miss out!" },
-  { url: "/Images/lol3.jpeg", title: "Fashion Trends", subtitle: "New arrivals in Ankara and Lace styles" },
+  { url: "/Images/xom1.jpeg", title: "Big Tech Sale", subtitle: "Up to 50% off Laptops & Phones" },
+  { url: "/Images/xom2.jpeg", title: "Weekend Awoof Deals", subtitle: "Limited time flash sales, don't miss out!" },
+  { url: "/Images/xom3.jpeg", title: "Fashion Trends", subtitle: "New arrivals in Ankara and Lace styles" },
 ];
 
 const BEST_SELLERS = [

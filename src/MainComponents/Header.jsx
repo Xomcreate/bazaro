@@ -29,7 +29,7 @@ export default function Header() {
     >
       {/* Left Message */}
       <p className="font-bold text-black/80">
-        Welcome to <span className="text-orange-600 font-bold">Bazaro</span>! Enjoy weekend offers — Code:{" "}
+        Welcome to <span className="text-orange-600 font-bold">ErrandBox</span>! Enjoy weekend offers — Code:{" "}
         <span className="text-orange-600 font-extrabold">HAPPY2018</span>
       </p>
 

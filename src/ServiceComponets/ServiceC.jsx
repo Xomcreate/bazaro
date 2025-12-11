@@ -108,7 +108,7 @@ function ServiceC() {
             margin: '0 auto 60px auto',
           }}
         >
-          We’ve built Bazaro to solve the toughest challenges for vendors in the marketplace.
+          We’ve built ErrandBox to solve the toughest challenges for vendors in the marketplace.
         </p>
 
         {/* === Horizontal Feature Cards Container === */}

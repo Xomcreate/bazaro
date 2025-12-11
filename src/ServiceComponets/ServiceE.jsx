@@ -74,7 +74,7 @@ function ServiceE() {
             marginBottom: '40px',
           }}
         >
-          Whether you're looking to launch a business or find your next great deal, Bazaro is the place to be.
+          Whether you're looking to launch a business or find your next great deal, ErrandBox is the place to be.
         </p>
 
         {/* === Dual Call to Action Buttons === */}

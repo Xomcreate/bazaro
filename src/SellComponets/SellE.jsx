@@ -34,13 +34,13 @@ function SellE() {
   const cardsVisible = Math.min(totalStories, numVisible);
 
   const stories = [
-    { id: 1, name: "Alex J.", location: "San Francisco, CA", quote: "Since moving to Bazaro, my monthly revenue has skyrocketed. The dedicated tools make inventory effortless.", metric: "$12,000+ Monthly Sales", photoUrl: "https://placehold.co/100x100/333333/FFFFFF?text=A.J." },
+    { id: 1, name: "Alex J.", location: "San Francisco, CA", quote: "Since moving to ErrandBox, my monthly revenue has skyrocketed. The dedicated tools make inventory effortless.", metric: "$12,000+ Monthly Sales", photoUrl: "https://placehold.co/100x100/333333/FFFFFF?text=A.J." },
     { id: 2, name: "Maria S.", location: "Austin, TX", quote: "The low commission structure meant I could finally increase my margins without raising prices for my buyers.", metric: "500+ Happy Customers", photoUrl: "https://placehold.co/100x100/666666/FFFFFF?text=M.S." },
     { id: 3, name: "David K.", location: "New York, NY", quote: "Easy product upload and excellent promotional tools. I scaled my small business faster than I expected!", metric: "4.9/5 Seller Rating", photoUrl: "https://placehold.co/100x100/999999/FFFFFF?text=D.K.",},
-    { id: 4, name: "Chloe P.", location: "Miami, FL", quote: "Secure payments and reliable customer support—Bazaro handles the logistics so I can focus purely on product creation.", metric: "100% On-Time Payouts", photoUrl: "https://placehold.co/100x100/AAAAAA/FFFFFF?text=C.P.",},
+    { id: 4, name: "Chloe P.", location: "Miami, FL", quote: "Secure payments and reliable customer support—ErrandBox handles the logistics so I can focus purely on product creation.", metric: "100% On-Time Payouts", photoUrl: "https://placehold.co/100x100/AAAAAA/FFFFFF?text=C.P.",},
     { id: 5, name: "Ben L.", location: "Seattle, WA", quote: "The interface is incredibly intuitive. I spent less time managing and more time selling right from day one.", metric: "750+ Products Listed", photoUrl: "https://placehold.co/100x100/CCCCCC/FFFFFF?text=B.L.",},
     { id: 6, name: "Yasmine O.", location: "Denver, CO", quote: "I truly appreciate the marketing opportunities provided. My holiday sales doubled thanks to their platform features.", metric: "$8,500 Holiday Earnings", photoUrl: "https://placehold.co/100x100/EEEEEE/333333?text=Y.O.",},
-    { id: 7, name: "Javier M.", location: "Chicago, IL", quote: "Finding a platform that prioritizes both seller experience and buyer security was key. Bazaro delivers both.", metric: "Top 10% Seller Status", photoUrl: "https://placehold.co/100x100/111111/FFFFFF?text=J.M.",},
+    { id: 7, name: "Javier M.", location: "Chicago, IL", quote: "Finding a platform that prioritizes both seller experience and buyer security was key. ErrandBox delivers both.", metric: "Top 10% Seller Status", photoUrl: "https://placehold.co/100x100/111111/FFFFFF?text=J.M.",},
     { id: 8, name: "Rachel T.", location: "Boston, MA", quote: "From inventory to payments, everything is streamlined. This is the simplest way I've found to run my online shop.", metric: "98% Repeat Buyer Rate", photoUrl: "https://placehold.co/100x100/222222/FFFFFF?text=R.T.",},
   ];
 

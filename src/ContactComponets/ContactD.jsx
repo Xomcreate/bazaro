@@ -8,57 +8,75 @@ const ACCENT_CLASS = "text-[#FF4500] hover:text-[#CC4000] transition duration-20
 const faqData = [
   {
     id: 1,
-    question: "How do I place an order on Bazaro?",
-    answer: "Placing an order is simple! Browse our categories or use the search bar to find products. Add items to your cart, navigate to checkout, and follow the steps to enter your shipping details and choose a payment method. You'll receive a confirmation email once your order is placed."
+    question: "How do I place an order on ErrandBox?",
+    answer:
+      "Placing an order is simple! Browse our categories or use the search bar to find products. Add items to your cart, navigate to checkout, and follow the steps to enter your shipping details and choose a payment method. You'll receive a confirmation email once your order is placed.",
   },
   {
     id: 2,
     question: "What payment methods are accepted?",
-    answer: "We accept all major credit and debit cards (Visa, MasterCard, Verve), secure bank transfers, and mobile money payments. All transactions are protected by industry-leading encryption to ensure your security."
+    answer:
+      "We accept all major credit and debit cards (Visa, MasterCard, Verve), secure bank transfers, and mobile money payments. All transactions are protected by industry-leading encryption to ensure your security.",
   },
   {
     id: 3,
     question: "How long does shipping typically take?",
-    answer: "Shipping times vary based on the vendor location and your destination. Standard delivery typically takes 3-7 business days. You can see estimated delivery windows for each item on its product page before checkout."
+    answer:
+      "Shipping times vary based on the vendor location and your destination. Standard delivery typically takes 3-7 business days. You can see estimated delivery windows for each item on its product page before checkout.",
   },
   {
     id: 4,
     question: "Can I track my order in real-time?",
-    answer: "Absolutely. Once your order is shipped, you will receive a tracking number via email and SMS. You can use this number directly on the courier's website or via the 'My Orders' section in your Bazaro account."
+    answer:
+      "Absolutely. Once your order is shipped, you will receive a tracking number via email and SMS. You can use this number directly on the courier's website or via the 'My Orders' section in your ErrandBox account.",
   },
   {
     id: 5,
     question: "What is the return and refund policy?",
-    answer: "We offer a 7-day return policy for most items, provided they are unused and in original packaging. To initiate a return, please go to the 'Returns' section in your account. Refunds are processed immediately upon receipt and inspection of the item, and funds typically reflect in your bank within 3-5 business days."
+    answer:
+      "We offer a 7-day return policy for most items, provided they are unused and in original packaging. To initiate a return, please go to the 'Returns' section in your account. Refunds are processed immediately upon receipt and inspection of the item, and funds typically reflect in your bank within 3-5 business days.",
   },
   {
     id: 6,
-    question: "How can I become a vendor on the Bazaro Marketplace?",
-    answer: "We welcome new vendors! Visit our 'Sell on Bazaro' page and fill out the vendor application form. Our team will review your application and guide you through the setup process, which includes verifying your business details and listing your first products."
+    question: "How can I become a vendor on the ErrandBox Marketplace?",
+    answer:
+      "We welcome new vendors! Visit our 'Sell on ErrandBox' page and fill out the vendor application form. Our team will review your application and guide you through the setup process, which includes verifying your business details and listing your first products.",
   },
 ];
 
-// --- Sub Component for a Single FAQ Item (Accordion) ---
+// --- Single FAQ Item ---
 const FAQItem = ({ question, answer, isOpen, toggleOpen }) => {
   return (
     <motion.div
       className="border-b border-gray-200 p-4 cursor-pointer"
       initial={false}
-      animate={{ backgroundColor: isOpen ? '#FFFDFD' : '#FFFFFF' }}
+      animate={{ backgroundColor: isOpen ? "#FFFDFD" : "#FFFFFF" }}
     >
-      <div 
+      <div
         className="flex justify-between items-start py-2"
         onClick={toggleOpen}
       >
-        <h3 className={`text-lg font-semibold pr-4 ${isOpen ? ACCENT_CLASS : 'text-gray-800'}`}>
+        <h3 className={`text-lg font-semibold pr-4 ${isOpen ? ACCENT_CLASS : "text-gray-800"}`}>
           {question}
         </h3>
+
         <motion.div
           animate={{ rotate: isOpen ? 45 : 0 }}
           transition={{ duration: 0.3 }}
           className="text-gray-500 shrink-0"
         >
-          <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round" className={isOpen ? ACCENT_CLASS : 'text-gray-400'}>
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            width="24"
+            height="24"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            strokeWidth="3"
+            strokeLinecap="round"
+            strokeLinejoin="round"
+            className={isOpen ? ACCENT_CLASS : "text-gray-400"}
+          >
             <line x1="12" y1="5" x2="12" y2="19"></line>
             <line x1="5" y1="12" x2="19" y2="12"></line>
           </svg>
@@ -94,9 +112,11 @@ export default function ContactD() {
   };
 
   return (
-    <section className="bg-gray-50 py-16 md:py-24" style={{ fontFamily: 'Inter, sans-serif' }}>
+    <section
+      className="bg-gray-50 py-16 md:py-24"
+      style={{ fontFamily: "Inter, sans-serif" }}
+    >
       <div className="max-w-7xl mx-auto px-6 md:px-8">
-        
         {/* Header Section */}
         <motion.div
           className="text-center mb-12"
@@ -104,15 +124,19 @@ export default function ContactD() {
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.5 }}
         >
-          <h2 className="text-4xl md:text-5xl font-extrabold text-gray-900" style={{ color: ORANGERED }}>
+          <h2
+            className="text-4xl md:text-5xl font-extrabold text-gray-900"
+            style={{ color: ORANGERED }}
+          >
             Frequently Asked Questions
           </h2>
+
           <p className="mt-3 text-lg text-gray-600">
-            Everything you need to know about shopping, selling, and support on Bazaro.
+            Everything you need to know about shopping, selling, and support on ErrandBox.
           </p>
         </motion.div>
 
-        {/* FAQ List Container */}
+        {/* FAQ Box */}
         <motion.div
           className="bg-white rounded-2xl shadow-xl border border-gray-200 divide-y divide-gray-100"
           initial={{ opacity: 0, scale: 0.98 }}
@@ -144,8 +168,8 @@ export default function ContactD() {
             Our dedicated support team is ready to help you directly.
           </p>
           <a
-            href="mailto:support@bazaro.com"
-            className={`mt-4 inline-flex items-center justify-center px-8 py-3 rounded-full font-bold uppercase tracking-wider shadow-lg transform hover:scale-[1.02] bg-gray-900 text-white transition duration-300`}
+            href="mailto:support@errandbox.com"
+            className="mt-4 inline-flex items-center justify-center px-8 py-3 rounded-full font-bold uppercase tracking-wider shadow-lg transform hover:scale-[1.02] text-white transition duration-300"
             style={{ backgroundColor: ORANGERED }}
           >
             Contact Support

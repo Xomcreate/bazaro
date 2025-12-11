@@ -72,7 +72,7 @@ const PaymentIcon = (props) => (
 
 function SellB() {
   const stepData = [
-    { title: "Create a Seller Account", description: "Sign up quickly and set up your vendor profile on Bazaro.", Icon: AccountIcon },
+    { title: "Create a Seller Account", description: "Sign up quickly and set up your vendor profile on ErrandBox.", Icon: AccountIcon },
     { title: "Upload Your Products", description: "List your inventory with professional photos and detailed descriptions.", Icon: UploadIcon },
     { title: "Manage Orders & Inventory", description: "Track new orders, update stock levels, and coordinate shipping.", Icon: OrderIcon },
     { title: "Receive Secure Payments", description: "Get paid reliably and securely through our protected payment gateway.", Icon: PaymentIcon },

@@ -97,7 +97,7 @@ function SellF() {
       >
         {/* Headline */}
         <h2 style={{ fontSize: '2.5em', fontWeight: 'bold', textAlign: 'center', marginBottom: '10px', color: 'black' }}>
-          Want to <span style={{ color: 'orangered' }}>Sell</span> on Bazaro?
+          Want to <span style={{ color: 'orangered' }}>Sell</span> on ErrandBox?
         </h2>
         <p style={{ textAlign: 'center', maxWidth: '600px', margin: '0 auto 40px auto', color: '#666' }}>
           Fill out the form below or contact us directly to start your partnership.

@@ -99,7 +99,7 @@ function ServiceD() {
             margin: '0 auto 60px auto',
           }}
         >
-          Getting started on Bazaro is quick, easy, and secure for everyone.
+          Getting started on ErrandBox is quick, easy, and secure for everyone.
         </p>
 
         {/* === Steps Container (Horizontal Flow) === */}

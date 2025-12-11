@@ -23,6 +23,7 @@ import Orders from './MainComponents/Orders';
 import TrackOrders from './MainComponents/TrackOrders';
 import Wishlist from './MainComponents/Wishlist';
 import Admin from './DashboardComponets/Admin';
+import Seller from './DashboardComponets/Seller';
 
 // import Marketplace from './MainComponents/Marketplace';
 
@@ -57,6 +58,7 @@ function App() {
                   <Route path="/track-order" element={<TrackOrders/>} />
                    <Route path="/wishlist" element={<Wishlist/>} />
                   <Route path="/admin" element={<Admin/>} />
+                     <Route path="/seller" element={<Seller/>} />
                 
         {/* Example for future routes */}
         {/* <Route path="/marketplace" element={<Marketplace />} /> */}

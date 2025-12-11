@@ -49,11 +49,11 @@ export default function Navbar() {
           {/* Logo */}
           <div className="flex items-center gap-2 ml-6 md:ml-16">
             <img
-              src="/Images/logo.jpeg"
-              alt="Bazaro Logo"
+              src="/Images/pom1.png"
+              alt="ErrandBox Logo"
               className="h-10 w-10 object-cover rounded"
             />
-            <span className="font-bold text-2xl md:text-3xl">Bazaro</span>
+            <span className="font-bold text-2xl md:text-3xl">ErrandBox</span>
           </div>
 
           {/* Desktop Menu */}
@@ -63,7 +63,7 @@ export default function Navbar() {
             <Link to="/marketplace" className="hover:text-black">Marketplace</Link>
             <Link to="/shop" className="hover:text-black">Shop</Link>
             <Link to="/service" className="hover:text-black">Services</Link>
-            <Link to="/sell" className="hover:text-black">Sell on Bazaro</Link>
+            <Link to="/sell" className="hover:text-black">Sell on ErrandBox</Link>
             <Link to="/contact" className="hover:text-black">Contact</Link>
           </nav>
 
@@ -162,7 +162,7 @@ export default function Navbar() {
             <Link to="/marketplace" onClick={() => setMobileMenuOpen(false)} className="hover:text-black">Marketplace</Link>
             <Link to="/shop" onClick={() => setMobileMenuOpen(false)} className="hover:text-black">Shop</Link>
             <Link to="/service" onClick={() => setMobileMenuOpen(false)} className="hover:text-black">Services</Link>
-            <Link to="/sell" onClick={() => setMobileMenuOpen(false)} className="hover:text-black">Sell on Bazaro</Link>
+            <Link to="/sell" onClick={() => setMobileMenuOpen(false)} className="hover:text-black">Sell on ErrandBox</Link>
             <Link to="/contact" onClick={() => setMobileMenuOpen(false)} className="hover:text-black">Contact</Link>
 
             {/* Mobile Search */}

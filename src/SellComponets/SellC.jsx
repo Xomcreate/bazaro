@@ -62,7 +62,7 @@ function SellC() {
     >
       {/* Section Header */}
       <h2 style={{ fontSize: '2.5em', fontWeight: 'bold', textAlign: 'center', marginBottom: '15px', color: 'black' }}>
-        Why <span style={{ color: 'orangered' }}>Sell</span> on Bazaro?
+        Why <span style={{ color: 'orangered' }}>Sell</span> on ErrandBox?
       </h2>
       <p style={{ textAlign: 'center', maxWidth: '700px', margin: '0 auto 50px auto', color: '#555' }}>
         We provide the tools and audience you need to grow your business online.

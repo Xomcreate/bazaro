@@ -107,7 +107,7 @@ export default function ContactB() {
         {/* Title Section */}
         <motion.div className="text-center mb-16" variants={itemVariants}>
           <h2 className="text-4xl md:text-6xl font-extrabold tracking-tight text-gray-900" style={{ color: ORANGERED }}>
-            Connect with Bazaro Support
+            Connect with ErrandBox Support
           </h2>
           <p className="mt-4 text-gray-600 max-w-3xl mx-auto text-lg">
             Our team is ready to assist you with orders, vendor inquiries, or technical support. Use the form below or reach out directly.
@@ -133,7 +133,7 @@ export default function ContactB() {
                 <MapPin />
                 <h3 className="text-xl font-bold text-gray-900">Headquarters</h3>
               </div>
-              <p className="text-gray-600">123 Bazaro Street, Suite 400</p>
+              <p className="text-gray-600">123 ErrandBox Street, Suite 400</p>
               <p className="text-gray-600">Ikeja, Lagos, Nigeria</p>
               <p className="text-gray-600">100001</p>
             </motion.article>
@@ -164,8 +164,8 @@ export default function ContactB() {
                 <h3 className="text-xl font-bold text-gray-900">Email & Social</h3>
               </div>
               {/* Changed link text color to dark gray */}
-              <a href="mailto:support@bazaro.com" className="block text-gray-800 font-medium hover:text-[#FF4500] transition">support@bazaro.com</a>
-              <a href="mailto:vendors@bazaro.com" className="block text-gray-800 font-medium hover:text-[#FF4500] transition mt-1">vendors@bazaro.com</a>
+              <a href="mailto:support@errandbox.com" className="block text-gray-800 font-medium hover:text-[#FF4500] transition">support@bazaro.com</a>
+              <a href="mailto:vendors@errandbox.com" className="block text-gray-800 font-medium hover:text-[#FF4500] transition mt-1">vendors@bazaro.com</a>
 
               <div className="flex items-center gap-6 mt-6">
                 {/* Changed social link text color to dark gray */}

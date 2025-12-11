@@ -95,7 +95,7 @@ function SellA() {
                 lineHeight: "1.1",
               }}
             >
-              Start Selling on <span style={{ color: "orangered" }}>Bazaro</span> Today!
+              Start Selling on <span style={{ color: "orangered" }}>ErrandBox</span> Today!
             </h1>
 
             {/* Subheadline */}

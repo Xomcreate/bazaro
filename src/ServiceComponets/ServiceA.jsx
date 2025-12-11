@@ -46,7 +46,7 @@ function ServiceA() {
             lineHeight: '1.5',
           }}
         >
-          Everything you need to buy, sell, and grow your business on Bazaro.
+          Everything you need to buy, sell, and grow your business on ErrandBox.
         </p>
         
         {/* === Call to Action Button === */}
@@ -68,7 +68,7 @@ function ServiceA() {
           // Placeholder onClick
           onClick={() => console.log('View Services Clicked')}
         >
-          Explore How Bazaro Works
+          Explore How ErrandBox Works
         </button>
 
         {/* --- --- */}
