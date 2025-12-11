@@ -24,6 +24,9 @@ import TrackOrders from './MainComponents/TrackOrders';
 import Wishlist from './MainComponents/Wishlist';
 import Admin from './DashboardComponets/Admin';
 import Seller from './DashboardComponets/Seller';
+import Users from './DashboardComponets/Users';
+import ForgetPassword from './MainComponents/ForgetPassword';
+import VerifyCode from './MainComponents/VerifyCode';
 
 // import Marketplace from './MainComponents/Marketplace';
 
@@ -59,6 +62,10 @@ function App() {
                    <Route path="/wishlist" element={<Wishlist/>} />
                   <Route path="/admin" element={<Admin/>} />
                      <Route path="/seller" element={<Seller/>} />
+                       <Route path="/user" element={<Users/>} />
+                        <Route path="/forget" element={<ForgetPassword/>} />
+                          <Route path="/verify" element={<VerifyCode/>} />
+                    
                 
         {/* Example for future routes */}
         {/* <Route path="/marketplace" element={<Marketplace />} /> */}
