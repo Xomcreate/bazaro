@@ -3,6 +3,7 @@
 
 import React, { useState } from "react";
 import { motion } from "framer-motion";
+import { Link } from "react-router-dom"; // <-- Added Link
 
 // --- Constants ---
 const BRAND_COLOR = "#FF4500";
@@ -246,10 +247,13 @@ export default function ContactC() {
                   className="w-4 h-4 rounded border-gray-300 checked:bg-white checked:border-white focus:ring-0 transition"
                   style={{ color: BRAND_COLOR }}
                 />
-                I agree to ErrandBox's
-                <a href="#" className="underline font-semibold hover:text-gray-200">
+                I agree to ErrandBox's{" "}
+                <Link
+                  to="/privacy"
+                  className="underline font-semibold hover:text-gray-200"
+                >
                   Privacy & Cookie Policy
-                </a>
+                </Link>
                 .
               </label>
 

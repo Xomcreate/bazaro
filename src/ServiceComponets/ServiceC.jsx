@@ -32,7 +32,6 @@ function ServiceC() {
     },
   ];
 
-  // Card style for the horizontal layout
   const featureCardStyle = {
     backgroundColor: 'white',
     padding: '30px',
@@ -40,8 +39,8 @@ function ServiceC() {
     boxShadow: '0 8px 20px rgba(0, 0, 0, 0.05)',
     border: `1px solid ${lightGrey}`,
     textAlign: 'center',
-    flex: 1, // Allows cards to share horizontal space equally
-    minWidth: '200px', // Ensures responsiveness
+    flex: '1 1 250px', // Allows cards to shrink/grow and wrap
+    minWidth: '250px', // Minimum width for responsiveness
     transition: 'border-color 0.3s',
     display: 'flex',
     flexDirection: 'column',
@@ -49,7 +48,7 @@ function ServiceC() {
   };
 
   const metricStyle = {
-    fontSize: '2.5em',
+    fontSize: '2.2em',
     fontWeight: '900',
     color: brandColor,
     marginBottom: '5px',
@@ -69,68 +68,42 @@ function ServiceC() {
   };
 
   const iconStyle = {
-      fontSize: '2em',
-      marginBottom: '15px',
-  }
+    fontSize: '2em',
+    marginBottom: '15px',
+  };
 
   return (
     <div
       style={{
-        backgroundColor: 'white', // Ensure it's back to pure white if ServiceB was off-white
+        backgroundColor: 'white',
         padding: '80px 20px',
         fontFamily: 'Arial, sans-serif',
       }}
     >
-      <div 
-        style={{
-          maxWidth: '1200px', 
-          margin: '0 auto',
-        }}
-      >
-        {/* === Section Header === */}
-        <h2 
-          style={{
-            fontSize: '2.2em',
-            fontWeight: '800',
-            color: darkText,
-            textAlign: 'center',
-            marginBottom: '15px',
-          }}
-        >
+      <div style={{ maxWidth: '1200px', margin: '0 auto' }}>
+        {/* Section Header */}
+        <h2 style={{ fontSize: '2.2em', fontWeight: '800', color: darkText, textAlign: 'center', marginBottom: '15px' }}>
           Your Partner for Online Success
         </h2>
-        <p 
-          style={{
-            fontSize: '1.1em',
-            color: '#777',
-            textAlign: 'center',
-            maxWidth: '800px',
-            margin: '0 auto 60px auto',
-          }}
-        >
+        <p style={{ fontSize: '1.1em', color: '#777', textAlign: 'center', maxWidth: '800px', margin: '0 auto 60px auto' }}>
           We’ve built ErrandBox to solve the toughest challenges for vendors in the marketplace.
         </p>
 
-        {/* === Horizontal Feature Cards Container === */}
+        {/* Feature Cards Container */}
         <div
           style={{
             display: 'flex',
             gap: '30px',
-            flexWrap: 'wrap', // Allows wrapping on smaller screens
-            justifyContent: 'center',
+            flexWrap: 'wrap',
+            justifyContent: 'center', // Center aligns cards on smaller screens
           }}
         >
           {differentiators.map((feature, index) => (
             <div key={index} style={featureCardStyle}>
-              
               <span style={iconStyle}>{feature.icon}</span>
-
               <div style={metricStyle}>{feature.metric}</div>
-              
               <h3 style={titleStyle}>{feature.title}</h3>
-              
               <p style={descriptionStyle}>{feature.description}</p>
-              
             </div>
           ))}
         </div>

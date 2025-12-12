@@ -89,8 +89,8 @@ export default function ShopF() {
         {/* REVIEWS GRID */}
         <div className="grid grid-cols-1 md:grid-cols-2 gap-8 mb-12">
           {reviews.map((review, index) => (
-            <div key={index} className="bg-white p-6 rounded-2xl shadow-md space-y-4">
-              <div className="flex items-center gap-4">
+            <div key={index} className="bg-white p-6 rounded-2xl shadow-md space-y-4 text-center">
+              <div className="flex flex-col items-center gap-4">
                 {review.photo ? (
                   <img
                     src={review.photo}
@@ -98,7 +98,7 @@ export default function ShopF() {
                     className="w-14 h-14 rounded-full object-cover"
                   />
                 ) : (
-                  <div className="w-14 h-14 rounded-full bg-gray-200 flex items-center justify-center text-gray-500">
+                  <div className="w-14 h-14 rounded-full bg-gray-200 flex items-center justify-center text-gray-500 text-lg font-bold">
                     {review.name.charAt(0)}
                   </div>
                 )}
@@ -106,7 +106,7 @@ export default function ShopF() {
                   <h4 className="font-semibold" style={{ color: COLOR_BLACK }}>
                     {review.name}
                   </h4>
-                  <div className="flex">{renderStars(review.rating)}</div>
+                  <div className="flex justify-center">{renderStars(review.rating)}</div>
                 </div>
               </div>
               <p className="text-gray-600">{review.comment}</p>
@@ -115,7 +115,7 @@ export default function ShopF() {
         </div>
 
         {/* REVIEW FORM */}
-        <div className="bg-white p-8 rounded-2xl shadow-md">
+        <div className="bg-white p-8 rounded-2xl shadow-md text-center">
           <h3 className="text-2xl font-bold mb-4" style={{ color: COLOR_BLACK }}>
             Write a Review
           </h3>
@@ -127,7 +127,7 @@ export default function ShopF() {
                 name="name"
                 value={formData.name}
                 onChange={handleChange}
-                className="w-full border border-gray-300 rounded-lg p-2"
+                className="w-full border border-gray-300 rounded-lg p-2 text-center"
                 placeholder="Your Name"
                 required
               />
@@ -135,15 +135,13 @@ export default function ShopF() {
 
             <div>
               <label className="block mb-1 font-semibold">Rating</label>
-              <div className="flex gap-2">
+              <div className="flex justify-center gap-2">
                 {[1, 2, 3, 4, 5].map((num) => (
                   <button
                     key={num}
                     type="button"
                     onClick={() => handleRatingChange(num)}
-                    className={`text-2xl ${
-                      num <= formData.rating ? "text-yellow-400" : "text-gray-300"
-                    } transition`}
+                    className={`text-2xl ${num <= formData.rating ? "text-yellow-400" : "text-gray-300"} transition`}
                   >
                     ★
                   </button>
@@ -157,7 +155,7 @@ export default function ShopF() {
                 name="comment"
                 value={formData.comment}
                 onChange={handleChange}
-                className="w-full border border-gray-300 rounded-lg p-2"
+                className="w-full border border-gray-300 rounded-lg p-2 text-center"
                 placeholder="Write your review here..."
                 rows={4}
                 required
@@ -171,7 +169,7 @@ export default function ShopF() {
                 name="photo"
                 value={formData.photo}
                 onChange={handleChange}
-                className="w-full border border-gray-300 rounded-lg p-2"
+                className="w-full border border-gray-300 rounded-lg p-2 text-center"
                 placeholder="Link to your photo"
               />
             </div>

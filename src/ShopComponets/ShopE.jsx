@@ -51,9 +51,12 @@ export default function ShopE() {
         {/* Sellers Grid */}
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
           {sellers.map((seller, index) => (
-            <div key={index} className="bg-white p-8 rounded-2xl shadow-md space-y-6">
+            <div
+              key={index}
+              className="bg-white p-8 rounded-2xl shadow-md space-y-6 text-center"
+            >
               {/* Seller Info */}
-              <div className="flex items-center gap-4">
+              <div className="flex flex-col items-center gap-4">
                 <img
                   src={seller.avatar}
                   alt={`${seller.name} Avatar`}
@@ -76,7 +79,7 @@ export default function ShopE() {
               </div>
 
               {/* Business Info */}
-              <div className="grid grid-cols-1 gap-4">
+              <div className="grid grid-cols-1 gap-4 text-center">
                 <div>
                   <h4 className="font-semibold text-lg" style={{ color: COLOR_BLACK }}>
                     Business Hours

@@ -107,7 +107,7 @@ function Loading({ onEnter }) {
 
           {/* Bazaro Logo Image (Centerpiece) */}
           <motion.img
-            src="/Images/logo.jpeg"
+            src="/Images/pom1.png"
             alt="Bazaro Logo"
             className="w-24 h-24 rounded-2xl object-cover shadow-2xl relative z-10"
             style={{ border: `4px solid ${TEXT_COLOR}` }} 
@@ -122,7 +122,7 @@ function Loading({ onEnter }) {
           style={{ color: PRIMARY_ACCENT }} 
           variants={contentVariants} // Uses default variants for entrance
         >
-          BAZARO
+          ErrandBox
         </motion.h1>
 
         {/* Loading Text */}

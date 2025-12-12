@@ -79,7 +79,7 @@ export default function Navbar() {
                 value={search}
                 onChange={(e) => setSearch(e.target.value)}
                 placeholder="Search products..."
-                className="flex-1 px-4 py-2 text-sm text-black outline-none"
+                className="flex-1 px-4 py-2 text-sm text-white outline-none"
               />
 
               <button
@@ -172,7 +172,7 @@ export default function Navbar() {
                 value={search}
                 onChange={(e) => setSearch(e.target.value)}
                 placeholder="Search..."
-                className="flex-1 px-4 py-2 text-sm text-black outline-none"
+                className="flex-1 px-4 py-2 text-sm text-white outline-none"
               />
               <button
                 className="px-4 flex items-center justify-center text-white"

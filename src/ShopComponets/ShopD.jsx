@@ -44,13 +44,10 @@ export default function ShopD() {
       className="w-full bg-gray-50 py-16"
       style={{ fontFamily: "Inter, sans-serif" }}
     >
-      <div className="max-w-7xl mx-auto px-6">
+      <div className="max-w-7xl mx-auto px-6 text-center">
         {/* HEADER TEXT */}
-        <div className="text-center mb-10">
-          <h2
-            className="text-4xl font-extrabold mb-3"
-            style={{ color: COLOR_BLACK }}
-          >
+        <div className="mb-10">
+          <h2 className="text-4xl font-extrabold mb-3" style={{ color: COLOR_BLACK }}>
             Product Listings
           </h2>
           <p className="text-gray-600 text-lg">
@@ -65,19 +62,19 @@ export default function ShopD() {
               key={item.id}
               className="
                 relative bg-white p-4 rounded-2xl shadow-md hover:shadow-xl 
-                transition-all duration-300 cursor-pointer
+                transition-all duration-300 cursor-pointer text-center
               "
             >
               {/* Badge */}
               <div
-                className="absolute px-3 py-1 text-xs font-bold rounded-full mt-1 ml-1"
+                className="absolute top-2 left-1/2 -translate-x-1/2 px-3 py-1 text-xs font-bold rounded-full"
                 style={{ backgroundColor: COLOR_ORANGERED, color: "white" }}
               >
                 {item.tag}
               </div>
 
               {/* Image */}
-              <div className="w-full h-48 rounded-xl overflow-hidden mb-4">
+              <div className="w-full h-48 rounded-xl overflow-hidden mb-4 mx-auto">
                 <img
                   src={item.img}
                   alt={item.name}
@@ -86,25 +83,18 @@ export default function ShopD() {
               </div>
 
               {/* Product Name */}
-              <h3 className="font-bold text-lg text-gray-800 mb-2">
-                {item.name}
-              </h3>
+              <h3 className="font-bold text-lg text-gray-800 mb-2">{item.name}</h3>
 
               {/* Prices */}
               <div className="mb-4">
-                <p
-                  className="text-xl font-bold"
-                  style={{ color: COLOR_ORANGERED }}
-                >
+                <p className="text-xl font-bold" style={{ color: COLOR_ORANGERED }}>
                   {item.price}
                 </p>
-                <p className="text-sm text-gray-400 line-through">
-                  {item.oldPrice}
-                </p>
+                <p className="text-sm text-gray-400 line-through">{item.oldPrice}</p>
               </div>
 
               {/* Action Buttons */}
-              <div className="flex gap-2">
+              <div className="flex flex-col sm:flex-row gap-2 justify-center">
                 <button
                   className="
                     flex-1 py-2 font-semibold rounded-xl transition

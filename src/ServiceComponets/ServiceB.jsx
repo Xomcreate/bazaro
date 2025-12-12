@@ -5,7 +5,6 @@ function ServiceB() {
   const darkText = '#333';
   const lightGrey = '#f7f7f7';
 
-  // Array of services with icons (emojis for simplicity)
   const services = [
     { icon: '🛍️', title: 'Product Listings', description: 'Showcase your products to thousands of eager buyers instantly.' },
     { icon: '🏪', title: 'Shop Creation', description: 'Vendors receive a dedicated, customizable online store page.' },
@@ -21,13 +20,13 @@ function ServiceB() {
     { icon: '📞', title: 'Vendor Support Team', description: 'Access to 24/7 dedicated customer care for all vendor needs.' },
   ];
 
-  // Inline styles for the grid items
+  // Base card style
   const serviceCardStyle = {
     backgroundColor: 'white',
     padding: '30px',
     borderRadius: '12px',
     boxShadow: '0 4px 15px rgba(0, 0, 0, 0.05)',
-    borderTop: `4px solid ${brandColor}`, // Highlighted top border
+    borderTop: `4px solid ${brandColor}`,
     textAlign: 'left',
     height: '100%',
     display: 'flex',
@@ -37,7 +36,7 @@ function ServiceB() {
   const iconStyle = {
     fontSize: '2.5em',
     marginBottom: '15px',
-    color: brandColor, // Use brand color for icons
+    color: brandColor,
   };
 
   const titleStyle = {
@@ -50,58 +49,41 @@ function ServiceB() {
   const descriptionStyle = {
     fontSize: '0.95em',
     color: '#666',
-    flexGrow: 1, // Ensures description pushes the card to full height
+    flexGrow: 1,
   };
 
   return (
     <div
       style={{
-        backgroundColor: lightGrey, // Slight off-white background to differentiate from Hero
+        backgroundColor: lightGrey,
         padding: '80px 20px',
         fontFamily: 'Arial, sans-serif',
       }}
     >
-      <div 
-        style={{
-          maxWidth: '1200px', 
-          margin: '0 auto',
-        }}
-      >
-        {/* === Section Header === */}
-        <h2 
-          style={{
-            fontSize: '2.2em',
-            fontWeight: '800',
-            color: darkText,
-            textAlign: 'center',
-            marginBottom: '15px',
-          }}
-        >
+      <div style={{ maxWidth: '1200px', margin: '0 auto' }}>
+        <h2 style={{ fontSize: '2.2em', fontWeight: '800', color: darkText, textAlign: 'center', marginBottom: '15px' }}>
           A Complete Marketplace Platform
         </h2>
-        <p 
-          style={{
-            fontSize: '1.1em',
-            color: '#777',
-            textAlign: 'center',
-            maxWidth: '800px',
-            margin: '0 auto 60px auto',
-          }}
-        >
+        <p style={{ fontSize: '1.1em', color: '#777', textAlign: 'center', maxWidth: '800px', margin: '0 auto 60px auto' }}>
           From listing to delivery, we provide the tools to run your business with confidence.
         </p>
 
-        {/* === Services Grid Container (CSS Grid Emulation) === */}
+        {/* --- Responsive Services Grid --- */}
         <div
           style={{
             display: 'grid',
-            // Responsive Grid: 4 columns for desktop, 2 for tablet, 1 for mobile (simple grid approach)
             gridTemplateColumns: 'repeat(auto-fit, minmax(250px, 1fr))',
             gap: '30px',
           }}
         >
           {services.map((service, index) => (
-            <div key={index} style={serviceCardStyle}>
+            <div
+              key={index}
+              style={{
+                ...serviceCardStyle,
+                textAlign: 'center', // <-- Center text for all screens, adjusts well for mobile
+              }}
+            >
               <span style={iconStyle}>{service.icon}</span>
               <h3 style={titleStyle}>{service.title}</h3>
               <p style={descriptionStyle}>{service.description}</p>

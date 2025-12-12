@@ -44,10 +44,10 @@ export default function ShopC() {
       className="w-full bg-gray-50 py-16"
       style={{ fontFamily: "Inter, sans-serif" }}
     >
-      <div className="max-w-7xl mx-auto px-6">
+      <div className="max-w-7xl mx-auto px-6 text-center">
         
         {/* HEADER TEXT */}
-        <div className="text-center mb-10">
+        <div className="mb-10">
           <h2
             className="text-4xl font-extrabold mb-3"
             style={{ color: COLOR_BLACK }}
@@ -66,20 +66,20 @@ export default function ShopC() {
               key={item.id}
               className="
                 bg-white p-4 rounded-2xl shadow-md hover:shadow-xl 
-                transition-all duration-300 cursor-pointer
+                transition-all duration-300 cursor-pointer relative text-center
               "
             >
               
               {/* Badge */}
               <div
-                className="absolute px-3 py-1 text-xs font-bold rounded-full mt-1 ml-1"
+                className="absolute top-2 left-1/2 -translate-x-1/2 px-3 py-1 text-xs font-bold rounded-full"
                 style={{ backgroundColor: COLOR_ORANGERED, color: "white" }}
               >
                 {item.tag}
               </div>
 
               {/* Image */}
-              <div className="w-full h-48 rounded-xl overflow-hidden mb-4">
+              <div className="w-full h-48 rounded-xl overflow-hidden mb-4 mx-auto">
                 <img
                   src={item.img}
                   alt={item.name}

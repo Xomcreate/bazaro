@@ -13,16 +13,15 @@ function ServiceD() {
     { title: 'Rate & Review', details: 'Provide feedback to sellers and help build a trustworthy community.', icon: '⭐' },
   ];
 
-  // Style for the container of each step
   const stepContainerStyle = {
-    flex: 1, // Ensures equal width in the horizontal layout
-    minWidth: '180px', // Responsive minimum width
+    flex: '1 1 180px', // Allow shrinking/growing for responsiveness
+    minWidth: '220px',
     textAlign: 'center',
     position: 'relative',
-    padding: '0 10px',
+    padding: '20px 10px',
+    marginBottom: '40px', // Space for wrapping on mobile
   };
 
-  // Style for the numbered circle
   const numberCircleStyle = {
     width: '50px',
     height: '50px',
@@ -40,18 +39,6 @@ function ServiceD() {
     position: 'relative',
   };
 
-  // Style for the connecting line (hidden on the last step)
-  const connectorLineStyle = {
-    position: 'absolute',
-    top: '25px',
-    left: '50%',
-    height: '2px',
-    width: 'calc(100% - 20px)', // Line spans almost the full width between numbers
-    backgroundColor: lightGrey,
-    zIndex: 1,
-    transform: 'translateX(-50%)',
-  };
-
   const titleStyle = {
     fontSize: '1.1em',
     fontWeight: 'bold',
@@ -64,74 +51,68 @@ function ServiceD() {
     color: '#666',
   };
 
+  const connectorLineStyle = (isLastStep = false) => ({
+    position: 'absolute',
+    top: '25px',
+    left: '50%',
+    height: '2px',
+    width: isLastStep ? '0' : '100%', // Hide line for last step
+    backgroundColor: lightGrey,
+    zIndex: 1,
+    transform: 'translateX(0%)',
+  });
+
   return (
-    <div
-      style={{
-        backgroundColor: 'white',
-        padding: '80px 20px',
-        fontFamily: 'Arial, sans-serif',
-      }}
-    >
-      <div 
-        style={{
-          maxWidth: '1200px', 
-          margin: '0 auto',
-        }}
-      >
-        {/* === Section Header === */}
-        <h2 
-          style={{
-            fontSize: '2.2em',
-            fontWeight: '800',
-            color: darkText,
-            textAlign: 'center',
-            marginBottom: '15px',
-          }}
-        >
+    <div style={{ backgroundColor: 'white', padding: '80px 20px', fontFamily: 'Arial, sans-serif' }}>
+      <div style={{ maxWidth: '1200px', margin: '0 auto' }}>
+        {/* Section Header */}
+        <h2 style={{ fontSize: '2.2em', fontWeight: '800', color: darkText, textAlign: 'center', marginBottom: '15px' }}>
           Simple Steps to Buy or Sell
         </h2>
-        <p 
-          style={{
-            fontSize: '1.1em',
-            color: '#777',
-            textAlign: 'center',
-            maxWidth: '800px',
-            margin: '0 auto 60px auto',
-          }}
-        >
+        <p style={{ fontSize: '1.1em', color: '#777', textAlign: 'center', maxWidth: '800px', margin: '0 auto 60px auto' }}>
           Getting started on ErrandBox is quick, easy, and secure for everyone.
         </p>
 
-        {/* === Steps Container (Horizontal Flow) === */}
+        {/* Steps Container */}
         <div
           style={{
             display: 'flex',
             justifyContent: 'space-between',
-            flexWrap: 'wrap', // Allow wrapping on small screens
+            flexWrap: 'wrap',
+            alignItems: 'flex-start',
           }}
         >
           {steps.map((step, index) => (
             <div key={index} style={stepContainerStyle}>
-              {/* Connector Line (Only if not the last step) */}
+              {/* Connector Line */}
               {index < steps.length - 1 && (
-                <div style={connectorLineStyle}></div>
+                <div style={connectorLineStyle(false)} className="connector-line"></div>
               )}
-              
-              {/* Step Number Circle */}
-              <div style={numberCircleStyle}>
-                {index + 1}
-              </div>
 
-              {/* Step Icon (Optional) */}
-              {/* <div style={{ fontSize: '2em', marginBottom: '10px' }}>{step.icon}</div> */}
+              {/* Step Number */}
+              <div style={numberCircleStyle}>{index + 1}</div>
 
-              {/* Step Title and Details */}
+              {/* Step Icon */}
+              <div style={{ fontSize: '2em', marginBottom: '10px' }}>{step.icon}</div>
+
+              {/* Step Title & Details */}
               <h3 style={titleStyle}>{step.title}</h3>
               <p style={detailsStyle}>{step.details}</p>
             </div>
           ))}
         </div>
       </div>
+
+      {/* Responsive Adjustment */}
+      <style>
+        {`
+          @media (max-width: 768px) {
+            .connector-line {
+              display: none; /* Hide horizontal lines on mobile */
+            }
+          }
+        `}
+      </style>
     </div>
   );
 }

@@ -1,13 +1,13 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 
-// Reusable SVG Icons for visual representation of each step
+// Reusable SVG Icons
 const StepIcon = ({ children, color, backgroundColor }) => (
   <div
     style={{
       width: '60px',
       height: '60px',
       borderRadius: '50%',
-      backgroundColor: backgroundColor, // Background color for the circle
+      backgroundColor,
       display: 'flex',
       justifyContent: 'center',
       alignItems: 'center',
@@ -21,7 +21,7 @@ const StepIcon = ({ children, color, backgroundColor }) => (
       height="30"
       viewBox="0 0 24 24"
       fill="none"
-      stroke={color} // Icon color
+      stroke={color}
       strokeWidth="2"
       strokeLinecap="round"
       strokeLinejoin="round"
@@ -31,7 +31,6 @@ const StepIcon = ({ children, color, backgroundColor }) => (
   </div>
 );
 
-// Step 1: Create a Seller Account (User/Profile Icon)
 const AccountIcon = (props) => (
   <StepIcon {...props}>
     <path d="M16 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path>
@@ -39,7 +38,6 @@ const AccountIcon = (props) => (
   </StepIcon>
 );
 
-// Step 2: Upload Your Products (Upload/Box Icon)
 const UploadIcon = (props) => (
   <StepIcon {...props}>
     <path d="M21.2 15c.7-1.2 1-2.5.7-3.9-.6-2.8-3.1-4.8-5.9-4.8-.7 0-1.4.1-2 .4-2.4-2.1-5.7-2.9-8.7-2-2.3.7-4 2.4-4.6 4.6"></path>
@@ -48,7 +46,6 @@ const UploadIcon = (props) => (
   </StepIcon>
 );
 
-// Step 3: Manage Orders & Inventory (Clipboard/List Icon)
 const OrderIcon = (props) => (
   <StepIcon {...props}>
     <path d="M16 4h2a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h2"></path>
@@ -59,7 +56,6 @@ const OrderIcon = (props) => (
   </StepIcon>
 );
 
-// Step 4: Receive Secure Payments (Credit Card/Dollar Icon)
 const PaymentIcon = (props) => (
   <StepIcon {...props}>
     <rect x="1" y="4" width="22" height="16" rx="2" ry="2"></rect>
@@ -69,8 +65,16 @@ const PaymentIcon = (props) => (
   </StepIcon>
 );
 
-
 function SellB() {
+  const [isMobile, setIsMobile] = useState(false);
+
+  useEffect(() => {
+    const handleResize = () => setIsMobile(window.innerWidth < 768);
+    handleResize(); // Check on mount
+    window.addEventListener('resize', handleResize);
+    return () => window.removeEventListener('resize', handleResize);
+  }, []);
+
   const stepData = [
     { title: "Create a Seller Account", description: "Sign up quickly and set up your vendor profile on ErrandBox.", Icon: AccountIcon },
     { title: "Upload Your Products", description: "List your inventory with professional photos and detailed descriptions.", Icon: UploadIcon },
@@ -85,7 +89,7 @@ function SellB() {
       height="40"
       viewBox="0 0 24 24"
       fill="none"
-      stroke="black" // Black arrow color
+      stroke="black"
       strokeWidth="1"
       strokeLinecap="round"
       strokeLinejoin="round"
@@ -98,8 +102,6 @@ function SellB() {
 
   return (
     <div style={{ backgroundColor: 'white', padding: '80px 20px', fontFamily: 'Arial, sans-serif' }}>
-      
-      {/* Section Header */}
       <h2 style={{ fontSize: '2.5em', fontWeight: 'bold', textAlign: 'center', marginBottom: '15px', color: 'black' }}>
         How <span style={{ color: 'orangered' }}>Selling</span> Works
       </h2>
@@ -111,49 +113,42 @@ function SellB() {
       <div
         style={{
           display: 'flex',
+          flexDirection: isMobile ? 'column' : 'row',
           justifyContent: 'center',
           alignItems: 'flex-start',
-          gap: '10px',
+          gap: isMobile ? '30px' : '10px',
           maxWidth: '1200px',
           margin: '0 auto',
         }}
       >
         {stepData.map((step, index) => (
           <React.Fragment key={index}>
-            {/* Step Card */}
             <div
               style={{
                 flex: 1,
                 padding: '25px',
                 borderRadius: '12px',
                 textAlign: 'center',
-                backgroundColor: '#f9f9f9', // Light gray background for cards
-                borderTop: '5px solid orangered', // Accent line
+                backgroundColor: '#f9f9f9',
+                borderTop: '5px solid orangered',
                 minHeight: '220px',
                 boxShadow: '0 4px 10px rgba(0, 0, 0, 0.05)',
               }}
             >
-              {/* Icon */}
-              <step.Icon color="orangered" backgroundColor="#ffede8" /> {/* Orangered icon on light coral background */}
-
-              {/* Step Number */}
+              <step.Icon color="orangered" backgroundColor="#ffede8" />
               <h3 style={{ fontSize: '1.5em', fontWeight: 'bold', color: 'orangered', marginBottom: '8px' }}>
                 Step {index + 1}
               </h3>
-
-              {/* Title */}
               <h4 style={{ fontSize: '1.1em', fontWeight: 'bold', color: 'black', marginBottom: '10px' }}>
                 {step.title}
               </h4>
-
-              {/* Description */}
               <p style={{ fontSize: '0.9em', color: '#666' }}>
                 {step.description}
               </p>
             </div>
 
-            {/* Separator Arrow (Not after the last step) */}
-            {index < stepData.length - 1 && (
+            {/* Separator Arrow */}
+            {!isMobile && index < stepData.length - 1 && (
               <div style={{ alignSelf: 'center', paddingTop: '40px' }}>
                 {arrowSVG}
               </div>

@@ -63,7 +63,10 @@ export default function ShopG() {
         {/* RECOMMENDED GRID */}
         <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-8">
           {recommended.map((item, index) => (
-            <div key={index} className="bg-white p-4 rounded-2xl shadow-md hover:shadow-xl transition">
+            <div
+              key={index}
+              className="bg-white p-4 rounded-2xl shadow-md hover:shadow-xl transition text-center flex flex-col items-center"
+            >
               <img
                 src={item.image}
                 alt={item.name}
@@ -72,7 +75,7 @@ export default function ShopG() {
               <h3 className="text-lg font-semibold mb-1" style={{ color: COLOR_BLACK }}>
                 {item.name}
               </h3>
-              <div className="flex items-center mb-2">{renderStars(item.rating)}</div>
+              <div className="flex justify-center mb-2">{renderStars(item.rating)}</div>
               <p className="text-orange-600 font-bold">{item.price}</p>
               <button
                 className="mt-3 w-full py-2 bg-orange-500 text-white font-semibold rounded-lg hover:bg-orange-600 transition"

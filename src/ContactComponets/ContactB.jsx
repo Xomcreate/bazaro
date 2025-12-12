@@ -97,7 +97,7 @@ export default function ContactB() {
   const labelClass = "text-sm font-medium text-gray-700 mb-1";
   
   return (
-    <section className="bg-gray-50 text-gray-900 py-16 md:py-24" style={{ minHeight: '100vh', fontFamily: 'Inter, sans-serif' }}>
+    <section id="contactb" className="bg-gray-50 text-gray-900 py-16 md:py-24" style={{ minHeight: '100vh', fontFamily: 'Inter, sans-serif' }}>
       <motion.div
         className="max-w-7xl mx-auto px-6 md:px-8"
         initial="hidden"
@@ -164,14 +164,14 @@ export default function ContactB() {
                 <h3 className="text-xl font-bold text-gray-900">Email & Social</h3>
               </div>
               {/* Changed link text color to dark gray */}
-              <a href="mailto:support@errandbox.com" className="block text-gray-800 font-medium hover:text-[#FF4500] transition">support@bazaro.com</a>
-              <a href="mailto:vendors@errandbox.com" className="block text-gray-800 font-medium hover:text-[#FF4500] transition mt-1">vendors@bazaro.com</a>
+              <a href="mailto:support@errandbox.com" className="block text-gray-800 font-medium hover:text-[#FF4500] transition">errandbox001@gmail.com</a>
+              <a href="mailto:vendors@errandbox.com" className="block text-gray-800 font-medium hover:text-[#FF4500] transition mt-1">errandbox001@gmail.com</a>
 
               <div className="flex items-center gap-6 mt-6">
                 {/* Changed social link text color to dark gray */}
-                <a href="#" className="text-gray-700 hover:text-[#FF4500] transition text-lg font-semibold">Facebook</a>
-                <a href="#" className="text-gray-700 hover:text-[#FF4500] transition text-lg font-semibold">Twitter</a>
-                <a href="#" className="text-gray-700 hover:text-[#FF4500] transition text-lg font-semibold">Instagram</a>
+                <a href="https://www.facebook.com/profile.php?id=61584912363128" className="text-gray-700 hover:text-[#FF4500] transition text-lg font-semibold">Facebook</a>
+                <a href="" className="text-gray-700 hover:text-[#FF4500] transition text-lg font-semibold">Twitter</a>
+                <a href="https://www.instagram.com/errandbox001?igsh=MXZndW84MXczcXZkdQ==" className="text-gray-700 hover:text-[#FF4500] transition text-lg font-semibold">Instagram</a>
               </div>
             </motion.article>
           </motion.div>
