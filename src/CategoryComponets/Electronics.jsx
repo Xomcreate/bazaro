@@ -1,5 +1,5 @@
 // File: src/CategoryComponets/Electronics.jsx
-import React from "react";
+import React, { useState, useEffect, useRef } from "react"; 
 
 // --- Product Data (Same as before) ---
 const products = [
@@ -29,38 +29,142 @@ const brands = [...new Set(products.map(p => p.brand))].sort();
 
 export const electronicsProducts = products;
 
+// --- REVISED ANIMATION COMPONENT FOR REPEATING ANIMATION ---
+const AnimatedProductCard = ({ product, handleAddToCart, addingToCartId, index }) => {
+    const [isVisible, setIsVisible] = useState(false);
+    const cardRef = useRef(null);
+
+    // Use Intersection Observer to detect when the card enters/leaves the viewport
+    useEffect(() => {
+        const observer = new IntersectionObserver(
+            ([entry]) => {
+                // IMPORTANT CHANGE: Set isVisible based on intersection state.
+                // If it's intersecting (visible), set to true (animate in).
+                // If it's NOT intersecting (scrolled out), set to false (reset state for next animation).
+                setIsVisible(entry.isIntersecting);
+                
+                // *** We no longer use observer.unobserve(entry.target); ***
+                // This allows the element to be observed perpetually for re-entry.
+            },
+            {
+                root: null, 
+                rootMargin: '0px',
+                threshold: 0.1, // Trigger when 10% of the item is visible
+            }
+        );
+
+        if (cardRef.current) {
+            observer.observe(cardRef.current);
+        }
+
+        return () => {
+            if (cardRef.current) {
+                observer.unobserve(cardRef.current);
+            }
+        };
+    }, []);
+
+    // Animation classes for a subtle slide-up/fade-in effect
+    const animationClasses = isVisible
+        ? 'opacity-100 translate-y-0'
+        : 'opacity-0 translate-y-6'; // Reset state when out of view
+
+    // Calculate a stagger delay based on the index (Stagger is applied only when appearing)
+    const delayStyle = isVisible ? {
+        transitionDelay: `${index * 50}ms`,
+        transitionTimingFunction: 'cubic-bezier(0.4, 0, 0.2, 1)',
+    } : {};
+
+
+    return (
+        <div 
+          ref={cardRef} 
+          key={product.id} 
+          style={delayStyle} 
+          className={`group bg-white border border-gray-100 rounded-xl shadow-lg hover:shadow-2xl transition duration-500 transform hover:-translate-y-1 overflow-hidden flex flex-col ${animationClasses}`} 
+        >
+          {/* Product Image Area */}
+          <div className="w-full h-36 sm:h-40 md:h-48 overflow-hidden shrink-0 bg-gray-50 flex items-center justify-center">
+            <img 
+              src={product.imageUrl} 
+              alt={product.name} 
+              className="w-full h-full object-cover p-2 group-hover:scale-[1.03] transition duration-300" 
+            />
+          </div>
+
+          {/* Product Info Area */}
+          <div className="p-3 flex flex-col grow">
+            <h3 className="text-sm font-medium text-black mb-1 grow">
+              {product.name.length > 60 
+                ? product.name.substring(0, 60) + '...' 
+                : product.name}
+            </h3>
+            
+            {/* Price Block */}
+            <div className="my-2">
+              <p className="text-xs text-gray-500 line-through">
+                  {product.oldPrice}
+              </p>
+              {/* ORANGERED PRICE */}
+              <p className="text-xl font-extrabold text-orangered">
+                  {product.price}
+              </p>
+            </div>
+
+            {/* ADD TO CART BUTTON */}
+            <button
+              onClick={(e) => {
+                  e.stopPropagation(); 
+                  handleAddToCart(product.id);
+              }}
+              className={`mt-auto w-full text-white py-2 text-sm font-bold rounded transition duration-200 ease-in-out shadow-md flex items-center justify-center gap-2
+                ${addingToCartId === product.id ? 'btn-orangered animate-pulse' : 'bg-black hover:btn-orangered'}
+              `}
+              aria-pressed={addingToCartId === product.id}
+            >
+              {/* small cart icon */}
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" aria-hidden>
+                <path d="M3 3h2l.4 2M7 13h10l4-8H5.4" stroke="white" strokeWidth="1.4" strokeLinecap="round" strokeLinejoin="round"/>
+                <circle cx="10" cy="20" r="1" fill="white"/>
+                <circle cx="18" cy="20" r="1" fill="white"/>
+              </svg>
+
+              {addingToCartId === product.id ? 'ADDING...' : 'ADD TO CART'}
+            </button>
+          </div>
+        </div>
+    );
+};
+// --- END REVISED ANIMATION COMPONENT ---
+
+
 function Electronics() {
   const [addingToCartId, setAddingToCartId] = React.useState(null);
 
   const handleAddToCart = (productId) => {
-    // 1. Set the ID to trigger the animation (shake/pulse on button)
     setAddingToCartId(productId);
 
-    // 2. Perform the actual cart logic (Simulated here)
     setTimeout(() => {
       console.log(`Product ${productId} added to cart.`);
-      // In a real app, you'd dispatch an action here (e.g. redux / context)
     }, 200);
 
-    // 3. Clear the animation state after a short period (0.5s)
     setTimeout(() => {
       setAddingToCartId(null);
     }, 500);
   };
 
   const BrandFilter = ({ brands }) => (
-    <div className="p-4 bg-white border border-gray-200 rounded-lg shadow-sm">
-      <h3 className="text-xl font-bold mb-4 border-b pb-2 text-black">Brand</h3>
-      <div className="space-y-3 h-96 overflow-y-auto pr-2">
+    <div className="py-2 px-4 sm:px-6 lg:px-8"> 
+      <h3 className="text-lg font-bold mb-3 text-black">Filter by Brand:</h3>
+      <div className="flex flex-wrap gap-x-6 gap-y-3">
         {brands.map((brand) => (
-          <label key={brand} className="flex items-center cursor-pointer hover:bg-gray-50 p-1 rounded transition">
+          <label key={brand} className="flex items-center cursor-pointer hover:text-orangered transition">
             <input 
               type="checkbox" 
-              className="h-4 w-4 text-orange-600 border-gray-300 rounded focus:ring-orange-600" 
+              className="h-4 w-4 text-orangered border-gray-300 rounded focus:ring-orangered" 
             />
-            <span className="ml-3 text-sm font-medium text-gray-700">{brand}</span>
-            <span className="ml-auto text-xs text-gray-400">
-              ({products.filter(p => p.brand === brand).length})
+            <span className="ml-2 text-sm font-medium text-gray-700 hover:text-black">
+              {brand} <span className="text-xs text-gray-400">({products.filter(p => p.brand === brand).length})</span>
             </span>
           </label>
         ))}
@@ -80,68 +184,62 @@ function Electronics() {
         .decor-accent { background: linear-gradient(90deg, rgba(255,69,0,0.08), rgba(255,140,0,0.04)); border-left: 4px solid rgba(255,69,0,0.12); }
       `}</style>
 
-      {/* --- Main Content Area --- */}
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+      {/* --- Main Content Area (Full width) --- */}
+      <div className="py-8">
         
-        {/* 1. Decorative Main Page Header/Writeup (SHOP YOUR ELECTRONICS) */}
-        <header className="mb-10 pb-6 relative">
-          {/* Decorative floating SVG behind header (subtle) */}
-          <svg className="absolute right-4 top-0 opacity-10 w-40 h-40 pointer-events-none" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
-            <circle cx="50" cy="20" r="30" fill="orangered" />
-          </svg>
+        {/* 1. Header/Writeup */}
+        <header className="mb-8 pb-4 relative border-b border-gray-200">
+          
+          <div className="px-4 sm:px-6 lg:px-8"> 
+            {/* Decorative floating SVG behind header (subtle) */}
+            <svg className="absolute right-4 top-0 opacity-10 w-40 h-40 pointer-events-none" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+              <circle cx="50" cy="20" r="30" fill="orangered" />
+            </svg>
 
-          <div className="flex items-start gap-4">
-            {/* Ribbon badge */}
-            <div className="px-3 py-1 rounded-full bg-orangered text-white font-semibold text-sm inline-flex items-center gap-2 shadow-sm">
-              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" aria-hidden>
-                <path d="M12 2 L15 8 L22 9 L17 14 L18 21 L12 18 L6 21 L7 14 L2 9 L9 8 Z" fill="white" />
-              </svg>
-              ELECTRONICS
-            </div>
+            <div className="flex items-start gap-4">
+              {/* Ribbon badge */}
+              <div className="px-3 py-1 rounded-full bg-orangered text-white font-semibold text-sm inline-flex items-center gap-2 shadow-sm shrink-0">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" aria-hidden>
+                  <path d="M12 2 L15 8 L22 9 L17 14 L18 21 L12 18 L6 21 L7 14 L2 9 L9 8 Z" fill="white" />
+                </svg>
+                ELECTRONICS
+              </div>
 
-            <div className="flex-1">
-              <h1 className="text-4xl md:text-5xl font-extrabold text-black leading-tight">
-                Discover Top-Rated <span className="text-orangered">Electronics & Gadgets</span>
-              </h1>
-              <p className="text-gray-700 mt-3 max-w-3xl decor-accent p-4 rounded">
-                Explore laptops, TVs, audio gear, smart-home devices and accessories — all tested for performance and value.
-                Shop with confidence: curated picks, competitive prices, and secure checkout. Upgrade your life with the
-                latest tech — from everyday essentials to high-performance gear.
-              </p>
+              <div className="flex-1">
+                <h1 className="text-4xl md:text-5xl font-extrabold text-black leading-tight">
+                  Discover Top-Rated <span className="text-orangered">Electronics & Gadgets</span>
+                </h1>
+                <p className="text-gray-700 mt-3 max-w-3xl decor-accent p-4 rounded">
+                  Explore laptops, TVs, audio gear, smart-home devices and accessories — all tested for performance and value.
+                  Shop with confidence: curated picks, competitive prices, and secure checkout. Upgrade your life with the
+                  latest tech — from everyday essentials to high-performance gear.
+                </p>
 
-              {/* small meta row */}
-              <div className="mt-4 flex items-center gap-4 text-sm text-gray-600">
-                <span className="flex items-center gap-2">
-                  <strong className="text-black">{products.length}</strong> products
-                </span>
-                <span className="flex items-center gap-2">
-                  <svg width="14" height="14" viewBox="0 0 24 24" fill="none" className="opacity-70"><circle cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="1"/></svg>
-                  Free shipping on select items
-                </span>
+                {/* small meta row */}
+                <div className="mt-4 flex items-center gap-4 text-sm text-gray-600">
+                  <span className="flex items-center gap-2">
+                    <strong className="text-black">{products.length}</strong> products
+                  </span>
+                  <span className="flex items-center gap-2">
+                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" className="opacity-70"><circle cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="1"/></svg>
+                    Free shipping on select items
+                  </span>
+                </div>
               </div>
             </div>
           </div>
 
+          {/* BRAND FILTER */}
           <div className="mt-6 border-t pt-4">
-            <span className="inline-block px-3 py-1 text-xs font-medium text-orangered border border-orangered rounded">New Arrivals</span>
-            <span className="ml-3 text-sm text-gray-500">Hand-picked gadgets for work, play, and home.</span>
+            <BrandFilter brands={brands} />
           </div>
         </header>
 
-        <div className="flex flex-col lg:flex-row gap-6">
-          {/* --- Sidebar (Filters) --- */}
-          <aside className="w-full lg:w-1/4 sticky top-4 self-start">
-            <BrandFilter brands={brands} />
-            <div className="p-4 bg-white border border-gray-200 rounded-lg shadow-sm mt-6">
-              <h3 className="text-xl font-bold mb-4 text-black">Price Range</h3>
-              <div className="h-10 bg-gray-100 flex items-center justify-center text-gray-500 rounded">Price Filter Tool</div>
-            </div>
-          </aside>
-
-          {/* --- Product Grid --- */}
-          <main className="w-full lg:w-3/4">
-            
-            {/* --- SUBHEADING for Product List --- */}
+        {/* --- Product Grid --- */}
+        <main className="w-full">
+          
+          {/* Subheading and results count container (with padding) */}
+          <div className="px-4 sm:px-6 lg:px-8"> 
             <h2 className="text-2xl font-bold text-black mb-4 border-b pb-2">
               Featured Electronics & Gadgets
             </h2>
@@ -149,67 +247,24 @@ function Electronics() {
             <div className="mb-4 text-gray-600">
               Showing 1 - {products.length} of {products.length} results
             </div>
+          </div>
 
-            <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
-              {products.map((product) => (
-                <div 
-                  key={product.id} 
-                  className="group bg-white border border-gray-100 rounded-xl shadow-lg hover:shadow-2xl transition duration-300 transform hover:-translate-y-1 overflow-hidden flex flex-col"
-                >
-                  {/* Product Image Area */}
-                  <div className="w-full h-36 sm:h-40 md:h-48 overflow-hidden shrink-0 bg-gray-50 flex items-center justify-center">
-                    <img 
-                      src={product.imageUrl} 
-                      alt={product.name} 
-                      className="w-full h-full object-cover p-2 group-hover:scale-[1.03] transition duration-300" 
-                    />
-                  </div>
-
-                  {/* Product Info Area */}
-                  <div className="p-3 flex flex-col grow">
-                    <h3 className="text-sm font-medium text-black mb-1 grow">
-                      {product.name.length > 60 
-                        ? product.name.substring(0, 60) + '...' 
-                        : product.name}
-                    </h3>
-                    
-                    {/* Price Block */}
-                    <div className="my-2">
-                        <p className="text-xs text-gray-500 line-through">
-                            {product.oldPrice}
-                        </p>
-                        {/* ORANGERED PRICE */}
-                        <p className="text-xl font-extrabold text-orangered">
-                            {product.price}
-                        </p>
-                    </div>
-
-                    {/* ADD TO CART BUTTON */}
-                    <button
-                      onClick={(e) => {
-                          e.stopPropagation(); // Prevents card click from triggering if wrapped
-                          handleAddToCart(product.id);
-                      }}
-                      className={`mt-auto w-full text-white py-2 text-sm font-bold rounded transition duration-200 ease-in-out shadow-md flex items-center justify-center gap-2
-                        ${addingToCartId === product.id ? 'btn-orangered animate-pulse' : 'bg-black hover:btn-orangered'}
-                      `}
-                      aria-pressed={addingToCartId === product.id}
-                    >
-                      {/* small cart icon */}
-                      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" aria-hidden>
-                        <path d="M3 3h2l.4 2M7 13h10l4-8H5.4" stroke="white" strokeWidth="1.4" strokeLinecap="round" strokeLinejoin="round"/>
-                        <circle cx="10" cy="20" r="1" fill="white"/>
-                        <circle cx="18" cy="20" r="1" fill="white"/>
-                      </svg>
-
-                      {addingToCartId === product.id ? 'ADDING...' : 'ADD TO CART'}
-                    </button>
-                  </div>
-                </div>
+          {/* Product Grid Container */}
+          <div className="px-4 sm:px-6 lg:px-8">
+            <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-4">
+              {products.map((product, index) => (
+                 // RENDER THE NEW ANIMATED COMPONENT HERE
+                <AnimatedProductCard 
+                  key={product.id}
+                  product={product}
+                  handleAddToCart={handleAddToCart}
+                  addingToCartId={addingToCartId}
+                  index={index} 
+                />
               ))}
             </div>
-          </main>
-        </div>
+          </div>
+        </main>
       </div>
     </div>
   );
