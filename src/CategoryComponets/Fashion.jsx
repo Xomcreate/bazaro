@@ -1,5 +1,5 @@
-// File: src/CategoryComponets/Fashion.jsx
 import React, { useState, useEffect, useRef } from "react";
+import { Link } from "react-router-dom";
 
 // --- Fashion Product Data (20 items) ---
 const fashionProducts = [
@@ -26,45 +26,45 @@ const fashionProducts = [
 ];
 
 const brands = [...new Set(fashionProducts.map(p => p.brand))].sort();
-export const fashionItems = fashionProducts;
 
-// --- Animated Product Card (same as Electronics.jsx) ---
+// --- Animated Product Card ---
 const AnimatedProductCard = ({ product, handleAddToCart, addingToCartId, index }) => {
   const [isVisible, setIsVisible] = useState(false);
   const cardRef = useRef(null);
 
   useEffect(() => {
-    const observer = new IntersectionObserver(
-      ([entry]) => setIsVisible(entry.isIntersecting),
-      { root: null, threshold: 0.1 }
-    );
+    const observer = new IntersectionObserver(([entry]) => setIsVisible(entry.isIntersecting), { threshold: 0.1 });
     if (cardRef.current) observer.observe(cardRef.current);
-    return () => { if (cardRef.current) observer.unobserve(cardRef.current); };
+    return () => cardRef.current && observer.unobserve(cardRef.current);
   }, []);
 
   const animationClasses = isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-6";
   const delayStyle = isVisible ? { transitionDelay: `${index * 50}ms`, transitionTimingFunction: 'cubic-bezier(0.4, 0, 0.2, 1)' } : {};
 
   return (
-    <div ref={cardRef} style={delayStyle} className={`group bg-white border border-gray-100 rounded-xl shadow-lg hover:shadow-2xl transition duration-500 transform hover:-translate-y-1 overflow-hidden flex flex-col ${animationClasses}`}>
-      <div className="w-full h-36 sm:h-40 md:h-48 overflow-hidden shrink-0 bg-gray-50 flex items-center justify-center">
-        <img src={product.imageUrl} alt={product.name} className="w-full h-full object-cover p-2 group-hover:scale-[1.03] transition duration-300" />
-      </div>
-      <div className="p-3 flex flex-col grow">
-        <h3 className="text-sm font-medium text-black mb-1 grow">{product.name.length > 60 ? product.name.substring(0, 60) + "..." : product.name}</h3>
-        <div className="my-2">
-          {product.oldPrice && <p className="text-xs text-gray-500 line-through">{product.oldPrice}</p>}
-          <p className="text-xl font-extrabold text-orangered">{product.price}</p>
+    <Link 
+      to={`/product-detail/${product.id}`} 
+      onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
+    >
+      <div ref={cardRef} style={delayStyle} className={`group bg-white border border-gray-100 rounded-xl shadow-lg hover:shadow-2xl transition duration-500 transform hover:-translate-y-1 overflow-hidden flex flex-col ${animationClasses}`}>
+        <div className="w-full h-36 sm:h-40 md:h-48 overflow-hidden shrink-0 bg-gray-50 flex items-center justify-center">
+          <img src={product.imageUrl} alt={product.name} className="w-full h-full object-cover p-2 group-hover:scale-[1.03] transition duration-300" />
         </div>
-        <button
-          onClick={() => handleAddToCart(product.id)}
-          className={`mt-auto w-full text-white py-2 text-sm font-bold rounded transition duration-200 ease-in-out shadow-md flex items-center justify-center gap-2 ${addingToCartId === product.id ? "btn-orangered animate-pulse" : "bg-black hover:btn-orangered"}`}
-          aria-pressed={addingToCartId === product.id}
-        >
-          ADD TO CART
-        </button>
+        <div className="p-3 flex flex-col grow">
+          <h3 className="text-sm font-medium text-black mb-1 grow">{product.name.length > 60 ? product.name.substring(0, 60) + "..." : product.name}</h3>
+          <div className="my-2">
+            {product.oldPrice && <p className="text-xs text-gray-500 line-through">{product.oldPrice}</p>}
+            <p className="text-xl font-extrabold text-orangered">{product.price}</p>
+          </div>
+          <button
+            onClick={(e) => { e.preventDefault(); handleAddToCart(product.id); }}
+            className={`mt-auto w-full text-white py-2 text-sm font-bold rounded transition duration-200 ease-in-out shadow-md flex items-center justify-center gap-2 ${addingToCartId === product.id ? "btn-orangered animate-pulse" : "bg-black hover:btn-orangered"}`}
+          >
+            {addingToCartId === product.id ? "ADDING..." : "ADD TO CART"}
+          </button>
+        </div>
       </div>
-    </div>
+    </Link>
   );
 };
 
@@ -103,19 +103,15 @@ function Fashion() {
         .btn-orangered { background: orangered; }
         .btn-orangered:hover { filter: brightness(0.95); }
         .decor-accent { background: linear-gradient(90deg, rgba(255,69,0,0.08), rgba(255,140,0,0.04)); border-left: 4px solid rgba(255,69,0,0.12); }
+        @keyframes pulse { 0%,100%{opacity:1}50%{opacity:0.8} }
+        .animate-pulse { animation: pulse 0.5s cubic-bezier(0.4,0,0.6,1) infinite; }
       `}</style>
 
       <div className="py-8">
         <header className="mb-8 pb-4 relative border-b border-gray-200">
           <div className="px-4 sm:px-6 lg:px-8">
-            <svg className="absolute right-4 top-0 opacity-10 w-40 h-40 pointer-events-none" viewBox="0 0 100 100">
-              <circle cx="50" cy="20" r="30" fill="orangered" />
-            </svg>
             <div className="flex items-start gap-4">
               <div className="px-3 py-1 rounded-full bg-orangered text-white font-semibold text-sm inline-flex items-center gap-2 shadow-sm shrink-0">
-                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" aria-hidden>
-                  <path d="M12 2 L15 8 L22 9 L17 14 L18 21 L12 18 L6 21 L7 14 L2 9 L9 8 Z" fill="white" />
-                </svg>
                 FASHION
               </div>
               <div className="flex-1">
@@ -126,32 +122,19 @@ function Fashion() {
                   Trendy clothing, footwear, and accessories curated for style, comfort, and affordability.
                 </p>
                 <div className="mt-4 flex items-center gap-4 text-sm text-gray-600">
-                  <span className="flex items-center gap-2">
-                    <strong className="text-black">{fashionProducts.length}</strong> products
-                  </span>
-                  <span className="flex items-center gap-2">
-                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" className="opacity-70"><circle cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="1"/></svg>
-                    Free shipping on select items
-                  </span>
+                  <span><strong className="text-black">{fashionProducts.length}</strong> products</span>
+                  <span className="flex items-center gap-1 text-orangered">Free shipping on select items</span>
                 </div>
               </div>
             </div>
           </div>
 
-          {/* BRAND FILTER */}
           <div className="mt-6 border-t pt-4">
             <BrandFilter brands={brands} />
           </div>
         </header>
 
-        {/* Product Grid */}
         <main className="w-full px-4 sm:px-6 lg:px-8">
-          <h2 className="text-2xl font-bold text-black mb-4 border-b pb-2">
-            Featured Fashion
-          </h2>
-          <div className="mb-4 text-gray-600">
-            Showing 1 - {fashionProducts.length} of {fashionProducts.length} results
-          </div>
           <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-4">
             {fashionProducts.map((product, index) => (
               <AnimatedProductCard

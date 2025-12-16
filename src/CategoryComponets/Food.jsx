@@ -1,8 +1,8 @@
-// File: src/CategoryComponets/Food.jsx
 import React, { useState, useEffect, useRef } from "react";
+import { Link } from "react-router-dom"; // <-- for dynamic routing
 
 // --- Food Product Data ---
-const products = [
+const foodProducts = [
   { id: 1, name: 'Organic Avocado', price: '₦1,500', oldPrice: '₦1,800', brand: 'FreshFarm', imageUrl: '/Images/food-1.jpg' },
   { id: 2, name: 'Almond Milk 1L', price: '₦1,200', oldPrice: '₦1,500', brand: 'NutriGood', imageUrl: '/Images/food-2.jpg' },
   { id: 3, name: 'Brown Eggs Pack', price: '₦900', oldPrice: '₦1,000', brand: 'FarmFresh', imageUrl: '/Images/food-3.jpg' },
@@ -10,7 +10,7 @@ const products = [
   { id: 5, name: 'Organic Honey', price: '₦2,500', oldPrice: '₦2,800', brand: 'SweetNature', imageUrl: '/Images/food-5.jpg' },
 ];
 
-const brands = [...new Set(products.map(p => p.brand))].sort();
+const brands = [...new Set(foodProducts.map(p => p.brand))].sort();
 
 // --- Animated Product Card ---
 const AnimatedProductCard = ({ product, handleAddToCart, addingToCartId, index }) => {
@@ -20,7 +20,7 @@ const AnimatedProductCard = ({ product, handleAddToCart, addingToCartId, index }
   useEffect(() => {
     const observer = new IntersectionObserver(
       ([entry]) => setIsVisible(entry.isIntersecting),
-      { root: null, threshold: 0.1 }
+      { threshold: 0.1 }
     );
     if (cardRef.current) observer.observe(cardRef.current);
     return () => { if (cardRef.current) observer.unobserve(cardRef.current); };
@@ -30,31 +30,42 @@ const AnimatedProductCard = ({ product, handleAddToCart, addingToCartId, index }
   const delayStyle = isVisible ? { transitionDelay: `${index * 50}ms`, transitionTimingFunction: 'cubic-bezier(0.4, 0, 0.2, 1)' } : {};
 
   return (
-    <div ref={cardRef} style={delayStyle} className={`group bg-white border border-gray-100 rounded-xl shadow-lg hover:shadow-2xl transition duration-500 transform hover:-translate-y-1 overflow-hidden flex flex-col ${animationClasses}`}>
-      <div className="w-full h-36 sm:h-40 md:h-48 overflow-hidden shrink-0 bg-gray-50 flex items-center justify-center">
-        <img src={product.imageUrl} alt={product.name} className="w-full h-full object-cover p-2 group-hover:scale-[1.03] transition duration-300" />
-      </div>
-      <div className="p-3 flex flex-col grow">
-        <h3 className="text-sm font-medium text-black mb-1 grow">{product.name.length > 60 ? product.name.substring(0, 60) + "..." : product.name}</h3>
-        <div className="my-2">
-          {product.oldPrice && <p className="text-xs text-gray-500 line-through">{product.oldPrice}</p>}
-          <p className="text-xl font-extrabold text-orangered">{product.price}</p>
+    <Link
+      to={`/product-detail/${product.id}`}
+      onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })} // <-- scroll-to-top added
+    >
+      <div ref={cardRef} style={delayStyle} className={`group bg-white border border-gray-100 rounded-xl shadow-lg hover:shadow-2xl transition duration-500 transform hover:-translate-y-1 overflow-hidden flex flex-col ${animationClasses}`}>
+        <div className="w-full h-36 sm:h-40 md:h-48 overflow-hidden shrink-0 bg-gray-50 flex items-center justify-center">
+          <img src={product.imageUrl} alt={product.name} className="w-full h-full object-cover p-2 group-hover:scale-[1.03] transition duration-300" />
         </div>
-        <button
-          onClick={() => handleAddToCart(product.id)}
-          className={`mt-auto w-full text-white py-2 text-sm font-bold rounded transition duration-200 ease-in-out shadow-md flex items-center justify-center gap-2 ${addingToCartId === product.id ? "btn-orangered animate-pulse" : "bg-black hover:btn-orangered"}`}
-          aria-pressed={addingToCartId === product.id}
-        >
-          ADD TO CART
-        </button>
+        <div className="p-3 flex flex-col grow">
+          <h3 className="text-sm font-medium text-black mb-1 grow">
+            {product.name.length > 60 ? product.name.substring(0, 60) + "..." : product.name}
+          </h3>
+          <div className="my-2">
+            {product.oldPrice && <p className="text-xs text-gray-500 line-through">{product.oldPrice}</p>}
+            <p className="text-xl font-extrabold text-orangered">{product.price}</p>
+          </div>
+          <button
+            onClick={(e) => { e.preventDefault(); handleAddToCart(product.id); }}
+            className={`mt-auto w-full text-white py-2 text-sm font-bold rounded transition duration-200 ease-in-out shadow-md flex items-center justify-center gap-2 ${addingToCartId === product.id ? "btn-orangered animate-pulse" : "bg-black hover:btn-orangered"}`}
+            aria-pressed={addingToCartId === product.id}
+          >
+            ADD TO CART
+          </button>
+        </div>
       </div>
-    </div>
+    </Link>
   );
 };
 
 // --- Food Component ---
 function Food() {
   const [addingToCartId, setAddingToCartId] = useState(null);
+
+  useEffect(() => {
+    window.scrollTo({ top: 0, behavior: "smooth" }); // <-- scroll to top on mount
+  }, []);
 
   const handleAddToCart = (productId) => {
     setAddingToCartId(productId);
@@ -70,7 +81,7 @@ function Food() {
           <label key={brand} className="flex items-center cursor-pointer hover:text-orangered transition">
             <input type="checkbox" className="h-4 w-4 text-orangered border-gray-300 rounded focus:ring-orangered" />
             <span className="ml-2 text-sm font-medium text-gray-700 hover:text-black">
-              {brand} <span className="text-xs text-gray-400">({products.filter(p => p.brand === brand).length})</span>
+              {brand} <span className="text-xs text-gray-400">({foodProducts.filter(p => p.brand === brand).length})</span>
             </span>
           </label>
         ))}
@@ -108,7 +119,7 @@ function Food() {
                 </p>
                 <div className="mt-4 flex items-center gap-4 text-sm text-gray-600">
                   <span className="flex items-center gap-2">
-                    <strong className="text-black">{products.length}</strong> products
+                    <strong className="text-black">{foodProducts.length}</strong> products
                   </span>
                   <span className="flex items-center gap-2">Free shipping on select items</span>
                 </div>
@@ -126,10 +137,10 @@ function Food() {
             Featured Food Products
           </h2>
           <div className="mb-4 text-gray-600">
-            Showing 1 - {products.length} of {products.length} results
+            Showing 1 - {foodProducts.length} of {foodProducts.length} results
           </div>
           <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-4">
-            {products.map((product, index) => (
+            {foodProducts.map((product, index) => (
               <AnimatedProductCard
                 key={product.id}
                 product={product}

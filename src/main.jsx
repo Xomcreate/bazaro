@@ -35,6 +35,8 @@ import Install from './MainComponents/Install';
 import Warranty from './MainComponents/Warranty';
 import Invoice from './MainComponents/Invoice';
 import FlashSales from './MainComponents/FlashSales';
+import ProductDetailPage from './MainComponents/ProductDetail';
+import ServiceDetail from './MainComponents/ServiceDetail';
 
 // import Marketplace from './MainComponents/Marketplace';
 
@@ -81,6 +83,8 @@ function App() {
                                    <Route path="/warranty-services" element={<Warranty/>} />
                                    <Route path="/invoice" element={<Invoice/>} />
                                     <Route path="/flashsale" element={<FlashSales/>} />
+                                       <Route path="/product-detail/:id" element={<ProductDetailPage/>} />
+                                        <Route path="/service-detail/:id" element={<ServiceDetail/>} />
                     
                 
         {/* Example for future routes */}

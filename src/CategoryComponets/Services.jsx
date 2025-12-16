@@ -1,4 +1,6 @@
+// File: src/CategoryComponets/Services.jsx
 import React, { useState, useEffect, useRef } from "react";
+import { Link } from "react-router-dom";
 
 const serviceProducts = [
   { id: 1, name: "Home Cleaning Service", price: "₦12,000", oldPrice: "", brand: "CleanCo", imageUrl: "/Images/service-1.jpg" },
@@ -25,7 +27,7 @@ const serviceProducts = [
 
 const brands = [...new Set(serviceProducts.map(p => p.brand))].sort();
 
-// Animated Service Card Component
+// --- Animated Service Card ---
 const AnimatedServiceCard = ({ product, handleBookService, bookingId, index }) => {
   const [isVisible, setIsVisible] = useState(false);
   const cardRef = useRef(null);
@@ -40,36 +42,42 @@ const AnimatedServiceCard = ({ product, handleBookService, bookingId, index }) =
   const animationClasses = isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-6';
 
   return (
-    <div 
-      ref={cardRef}
-      style={delayStyle}
-      className={`group bg-white border border-gray-100 rounded-xl shadow-lg hover:shadow-2xl transition duration-500 transform hover:-translate-y-1 overflow-hidden flex flex-col ${animationClasses}`}
+    <Link 
+      to={`/service-detail/${product.id}`} 
+      onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
     >
-      <div className="w-full h-36 sm:h-40 md:h-48 flex items-center justify-center bg-gray-50 overflow-hidden">
-        <img 
-          src={product.imageUrl} 
-          alt={product.name} 
-          className="w-full h-full object-cover p-2 group-hover:scale-[1.03] transition duration-300"
-          onError={(e)=>{ e.target.onerror=null; e.target.src="https://placehold.co/400x300/f3f4f6/9ca3af?text=Image+Missing"; }}
-        />
-      </div>
-      <div className="p-3 flex flex-col grow">
-        <h3 className="text-sm font-medium text-black mb-1 grow">{product.name.length>60?product.name.substring(0,60)+'...':product.name}</h3>
-        <div className="my-2">
-          {product.oldPrice && <p className="text-xs text-gray-500 line-through">{product.oldPrice}</p>}
-          <p className="text-xl font-extrabold text-orangered">{product.price}</p>
+      <div 
+        ref={cardRef}
+        style={delayStyle}
+        className={`group bg-white border border-gray-100 rounded-xl shadow-lg hover:shadow-2xl transition duration-500 transform hover:-translate-y-1 overflow-hidden flex flex-col ${animationClasses}`}
+      >
+        <div className="w-full h-36 sm:h-40 md:h-48 flex items-center justify-center bg-gray-50 overflow-hidden">
+          <img 
+            src={product.imageUrl} 
+            alt={product.name} 
+            className="w-full h-full object-cover p-2 group-hover:scale-[1.03] transition duration-300"
+            onError={(e)=>{ e.target.onerror=null; e.target.src="https://placehold.co/400x300/f3f4f6/9ca3af?text=Image+Missing"; }}
+          />
         </div>
-        <button 
-          onClick={()=>handleBookService(product.id)}
-          className={`mt-auto w-full text-white py-2 text-sm font-bold rounded transition duration-200 ease-in-out shadow-md flex items-center justify-center gap-2 ${bookingId===product.id?'btn-orangered animate-pulse':'bg-black hover:btn-orangered'}`}
-        >
-          {bookingId===product.id?'BOOKING...':'BOOK SERVICE'}
-        </button>
+        <div className="p-3 flex flex-col grow">
+          <h3 className="text-sm font-medium text-black mb-1 grow">{product.name.length>60?product.name.substring(0,60)+'...':product.name}</h3>
+          <div className="my-2">
+            {product.oldPrice && <p className="text-xs text-gray-500 line-through">{product.oldPrice}</p>}
+            <p className="text-xl font-extrabold text-orangered">{product.price}</p>
+          </div>
+          <button 
+            onClick={(e)=>{ e.preventDefault(); handleBookService(product.id); }}
+            className={`mt-auto w-full text-white py-2 text-sm font-bold rounded transition duration-200 ease-in-out shadow-md flex items-center justify-center gap-2 ${bookingId===product.id?'btn-orangered animate-pulse':'bg-black hover:btn-orangered'}`}
+          >
+            {bookingId===product.id?'BOOKING...':'BOOK SERVICE'}
+          </button>
+        </div>
       </div>
-    </div>
+    </Link>
   )
 };
 
+// --- Services Component ---
 function Services() {
   const [bookingId, setBookingId] = useState(null);
 
@@ -95,9 +103,6 @@ function Services() {
         <header className="mb-8 pb-4 border-b border-gray-200 relative">
           <div className="flex items-start gap-4">
             <div className="px-3 py-1 rounded-full bg-orangered text-white font-semibold text-sm inline-flex items-center gap-2 shadow-sm shrink-0">
-              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="white" strokeWidth="2">
-                <path d="M12 2 L15 8 L22 9 L17 14 L18 21 L12 18 L6 21 L7 14 L2 9 L9 8 Z" fill="white" />
-              </svg>
               SERVICES
             </div>
 
@@ -117,7 +122,7 @@ function Services() {
 
           {/* Brand Filter */}
           <div className="mt-4 py-4 border-t border-gray-200 flex flex-wrap gap-4">
-            {brands.map((brand)=>(
+            {brands.map((brand)=>( 
               <label key={brand} className="flex items-center cursor-pointer hover:text-orangered transition">
                 <input type="checkbox" className="h-4 w-4 text-orangered border-gray-300 rounded focus:ring-orangered"/>
                 <span className="ml-2 text-sm font-medium text-gray-700 hover:text-black">{brand} <span className="text-xs text-gray-400">({serviceProducts.filter(p=>p.brand===brand).length})</span></span>
@@ -126,7 +131,7 @@ function Services() {
           </div>
         </header>
 
-        {/* Product Grid */}
+        {/* Service Grid */}
         <main className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-4">
           {serviceProducts.map((p,i)=>(
             <AnimatedServiceCard key={p.id} product={p} handleBookService={handleBookService} bookingId={bookingId} index={i}/>

@@ -1,4 +1,6 @@
+// File: src/CategoryComponets/Stationery.jsx
 import React, { useState, useEffect, useRef } from "react";
+import { Link } from "react-router-dom";
 
 const stationeryProducts = [
   { id: 1, name: "A4 Notebook 200 Pages", price: "₦1,200", oldPrice: "₦1,500", brand: "PaperMate", imageUrl: "/Images/stationery-1.jpg" },
@@ -40,33 +42,38 @@ const AnimatedStationeryCard = ({ product, handleAddToCart, addingToCartId, inde
   const animationClasses = isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-6';
 
   return (
-    <div
-      ref={cardRef}
-      style={delayStyle}
-      className={`group bg-white border border-gray-100 rounded-xl shadow-lg hover:shadow-2xl transition duration-500 transform hover:-translate-y-1 overflow-hidden flex flex-col ${animationClasses}`}
+    <Link
+      to={`/product-detail/${product.id}`}
+      onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
     >
-      <div className="w-full h-36 sm:h-40 md:h-48 flex items-center justify-center bg-gray-50 overflow-hidden">
-        <img
-          src={product.imageUrl}
-          alt={product.name}
-          className="w-full h-full object-cover p-2 group-hover:scale-[1.03] transition duration-300"
-          onError={(e) => { e.target.onerror = null; e.target.src = "https://placehold.co/400x300/f3f4f6/9ca3af?text=Image+Missing"; }}
-        />
-      </div>
-      <div className="p-3 flex flex-col grow">
-        <h3 className="text-sm font-medium text-black mb-1 grow">{product.name.length > 60 ? product.name.substring(0, 60) + '...' : product.name}</h3>
-        <div className="my-2">
-          {product.oldPrice && <p className="text-xs text-gray-500 line-through">{product.oldPrice}</p>}
-          <p className="text-xl font-extrabold text-orangered">{product.price}</p>
+      <div
+        ref={cardRef}
+        style={delayStyle}
+        className={`group bg-white border border-gray-100 rounded-xl shadow-lg hover:shadow-2xl transition duration-500 transform hover:-translate-y-1 overflow-hidden flex flex-col ${animationClasses}`}
+      >
+        <div className="w-full h-36 sm:h-40 md:h-48 flex items-center justify-center bg-gray-50 overflow-hidden">
+          <img
+            src={product.imageUrl}
+            alt={product.name}
+            className="w-full h-full object-cover p-2 group-hover:scale-[1.03] transition duration-300"
+            onError={(e) => { e.target.onerror = null; e.target.src = "https://placehold.co/400x300/f3f4f6/9ca3af?text=Image+Missing"; }}
+          />
         </div>
-        <button
-          onClick={() => handleAddToCart(product.id)}
-          className={`mt-auto w-full text-white py-2 text-sm font-bold rounded transition duration-200 ease-in-out shadow-md flex items-center justify-center gap-2 ${addingToCartId === product.id ? 'btn-orangered animate-pulse' : 'bg-black hover:btn-orangered'}`}
-        >
-          {addingToCartId === product.id ? 'ADDING...' : 'ADD TO CART'}
-        </button>
+        <div className="p-3 flex flex-col grow">
+          <h3 className="text-sm font-medium text-black mb-1 grow">{product.name.length > 60 ? product.name.substring(0, 60) + '...' : product.name}</h3>
+          <div className="my-2">
+            {product.oldPrice && <p className="text-xs text-gray-500 line-through">{product.oldPrice}</p>}
+            <p className="text-xl font-extrabold text-orangered">{product.price}</p>
+          </div>
+          <button
+            onClick={(e) => { e.preventDefault(); handleAddToCart(product.id); }}
+            className={`mt-auto w-full text-white py-2 text-sm font-bold rounded transition duration-200 ease-in-out shadow-md flex items-center justify-center gap-2 ${addingToCartId === product.id ? 'btn-orangered animate-pulse' : 'bg-black hover:btn-orangered'}`}
+          >
+            {addingToCartId === product.id ? 'ADDING...' : 'ADD TO CART'}
+          </button>
+        </div>
       </div>
-    </div>
+    </Link>
   )
 };
 
@@ -95,9 +102,6 @@ function Stationery() {
         <header className="mb-8 pb-4 border-b border-gray-200 relative">
           <div className="flex items-start gap-4">
             <div className="px-3 py-1 rounded-full bg-orangered text-white font-semibold text-sm inline-flex items-center gap-2 shrink-0">
-              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="white" strokeWidth="2">
-                <path d="M12 2 L15 8 L22 9 L17 14 L18 21 L12 18 L6 21 L7 14 L2 9 L9 8 Z" fill="white" />
-              </svg>
               STATIONERY
             </div>
 

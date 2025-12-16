@@ -1,4 +1,6 @@
+// File: src/CategoryComponets/Sports.jsx
 import React, { useState, useEffect, useRef } from "react";
+import { Link } from "react-router-dom";
 
 const sportsProducts = [
   { id: 1, name: "Football Nike Pro", price: "₦12,500", oldPrice: "₦15,000", brand: "Nike", imageUrl: "/Images/sports-1.jpg" },
@@ -11,7 +13,7 @@ const sportsProducts = [
 
 const brands = [...new Set(sportsProducts.map(p => p.brand))].sort();
 
-// Animated Product Card Component
+// --- Animated Product Card ---
 const AnimatedProductCard = ({ product, handleAddToCart, addingToCartId, index }) => {
   const [isVisible, setIsVisible] = useState(false);
   const cardRef = useRef(null);
@@ -26,36 +28,42 @@ const AnimatedProductCard = ({ product, handleAddToCart, addingToCartId, index }
   const animationClasses = isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-6';
 
   return (
-    <div 
-      ref={cardRef}
-      style={delayStyle}
-      className={`group bg-white border border-gray-100 rounded-xl shadow-lg hover:shadow-2xl transition duration-500 transform hover:-translate-y-1 overflow-hidden flex flex-col ${animationClasses}`}
+    <Link 
+      to={`/product-detail/${product.id}`}
+      onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
     >
-      <div className="w-full h-36 sm:h-40 md:h-48 overflow-hidden shrink-0 bg-gray-50 flex items-center justify-center">
-        <img 
-          src={product.imageUrl} 
-          alt={product.name} 
-          className="w-full h-full object-cover p-2 group-hover:scale-[1.03] transition duration-300"
-          onError={(e)=>{ e.target.onerror=null; e.target.src="https://placehold.co/400x300/f3f4f6/9ca3af?text=Image+Missing"; }}
-        />
-      </div>
-      <div className="p-3 flex flex-col grow">
-        <h3 className="text-sm font-medium text-black mb-1 grow">{product.name.length>60?product.name.substring(0,60)+'...':product.name}</h3>
-        <div className="my-2">
-          <p className="text-xs text-gray-500 line-through">{product.oldPrice}</p>
-          <p className="text-xl font-extrabold text-orangered">{product.price}</p>
+      <div 
+        ref={cardRef}
+        style={delayStyle}
+        className={`group bg-white border border-gray-100 rounded-xl shadow-lg hover:shadow-2xl transition duration-500 transform hover:-translate-y-1 overflow-hidden flex flex-col ${animationClasses}`}
+      >
+        <div className="w-full h-36 sm:h-40 md:h-48 overflow-hidden shrink-0 bg-gray-50 flex items-center justify-center">
+          <img 
+            src={product.imageUrl} 
+            alt={product.name} 
+            className="w-full h-full object-cover p-2 group-hover:scale-[1.03] transition duration-300"
+            onError={(e)=>{ e.target.onerror=null; e.target.src="https://placehold.co/400x300/f3f4f6/9ca3af?text=Image+Missing"; }}
+          />
         </div>
-        <button 
-          onClick={()=>handleAddToCart(product.id)}
-          className={`mt-auto w-full text-white py-2 text-sm font-bold rounded transition duration-200 ease-in-out shadow-md flex items-center justify-center gap-2 ${addingToCartId===product.id?'btn-orangered animate-pulse':'bg-black hover:btn-orangered'}`}
-        >
-          {addingToCartId===product.id?'ADDING...':'ADD TO CART'}
-        </button>
+        <div className="p-3 flex flex-col grow">
+          <h3 className="text-sm font-medium text-black mb-1 grow">{product.name.length>60?product.name.substring(0,60)+'...':product.name}</h3>
+          <div className="my-2">
+            {product.oldPrice && <p className="text-xs text-gray-500 line-through">{product.oldPrice}</p>}
+            <p className="text-xl font-extrabold text-orangered">{product.price}</p>
+          </div>
+          <button 
+            onClick={(e)=>{ e.preventDefault(); handleAddToCart(product.id); }}
+            className={`mt-auto w-full text-white py-2 text-sm font-bold rounded transition duration-200 ease-in-out shadow-md flex items-center justify-center gap-2 ${addingToCartId===product.id?'btn-orangered animate-pulse':'bg-black hover:btn-orangered'}`}
+          >
+            {addingToCartId===product.id?'ADDING...':'ADD TO CART'}
+          </button>
+        </div>
       </div>
-    </div>
+    </Link>
   )
 };
 
+// --- Sports Component ---
 function Sports() {
   const [addingToCartId, setAddingToCartId] = useState(null);
 
@@ -81,7 +89,6 @@ function Sports() {
         <header className="mb-8 pb-4 border-b border-gray-200 relative">
           <div className="flex items-start gap-4">
             <div className="px-3 py-1 rounded-full bg-orangered text-white font-semibold text-sm inline-flex items-center gap-2 shadow-sm shrink-0">
-              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="white" strokeWidth="2"><path d="M13 18.5C13 19.3284 12.3284 20 11.5 20C10.6716 20 10 19.3284 10 18.5C10 17.6716 10.6716 17 11.5 17C12.3284 17 13 17.6716 13 18.5Z" fill="white"/><path d="M12 2C12.6373 2.82522 13.149 3.65044 13.535 4.5085C13.921 5.36657 14.1812 6.25759 14.3155 7.1815C14.4498 8.10541 14.4578 9.06214 14.3396 10.049C14.2215 11.0359 13.9772 12.0494 13.6067 13.088C13.2363 14.1266 12.7441 15.1742 12.1302 16.2307L12 16.5L11.8698 16.2307C11.2559 15.1742 10.7637 14.1266 10.3933 13.088C10.0228 12.0494 9.77852 11.0359 9.66041 10.049C9.54229 9.06214 9.55025 8.10541 9.68452 7.1815C9.8188 6.25759 10.079 5.36657 10.465 4.5085C10.851 3.65044 11.3627 2.82522 12 2Z" fill="white" stroke="white" strokeWidth="0.5"/></svg>
               SPORTS & FITNESS
             </div>
 
@@ -106,7 +113,7 @@ function Sports() {
 
           {/* Brand Filter */}
           <div className="mt-4 py-4 border-t border-gray-200 flex flex-wrap gap-4">
-            {brands.map((brand)=>(
+            {brands.map((brand)=>( 
               <label key={brand} className="flex items-center cursor-pointer hover:text-orangered transition">
                 <input type="checkbox" className="h-4 w-4 text-orangered border-gray-300 rounded focus:ring-orangered"/>
                 <span className="ml-2 text-sm font-medium text-gray-700 hover:text-black">{brand} <span className="text-xs text-gray-400">({sportsProducts.filter(p=>p.brand===brand).length})</span></span>

@@ -1,5 +1,6 @@
 // File: src/CategoryComponets/Automobile.jsx
 import React, { useState, useEffect, useRef } from "react";
+import { Link } from "react-router-dom";
 
 // --- Automobile Products ---
 const automobileProducts = [
@@ -42,45 +43,52 @@ const AnimatedProductCard = ({ product, handleAddToCart, addingToCartId, index }
   const animationClasses = isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-6';
 
   return (
-    <div 
-      ref={cardRef}
-      style={delayStyle}
-      className={`group bg-white border border-gray-100 rounded-xl shadow-lg hover:shadow-2xl transition duration-500 transform hover:-translate-y-1 overflow-hidden flex flex-col ${animationClasses}`}
+    <Link
+      to={`/product-detail/${product.id}`}
+      onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
     >
-      <div className="w-full h-36 sm:h-40 md:h-48 overflow-hidden shrink-0 bg-gray-50 flex items-center justify-center">
-        <img 
-          src={product.imageUrl} 
-          alt={product.name} 
-          className="w-full h-full object-cover p-2 group-hover:scale-[1.03] transition duration-300"
-          onError={(e)=>{ e.target.onerror=null; e.target.src="https://placehold.co/400x300/f3f4f6/9ca3af?text=Image+Missing"; }}
-        />
-      </div>
-      <div className="p-3 flex flex-col grow">
-        <h3 className="text-sm font-medium text-black mb-1 grow">{product.name.length>60?product.name.substring(0,60)+'...':product.name}</h3>
-        <div className="my-2">
-          <p className="text-xs text-gray-500 line-through">{product.oldPrice}</p>
-          <p className="text-xl font-extrabold text-orangered">{product.price}</p>
+      <div
+        ref={cardRef}
+        style={delayStyle}
+        className={`group bg-white border border-gray-100 rounded-xl shadow-lg hover:shadow-2xl transition duration-500 transform hover:-translate-y-1 overflow-hidden flex flex-col ${animationClasses}`}
+      >
+        <div className="w-full h-36 sm:h-40 md:h-48 overflow-hidden shrink-0 bg-gray-50 flex items-center justify-center">
+          <img
+            src={product.imageUrl}
+            alt={product.name}
+            className="w-full h-full object-cover p-2 group-hover:scale-[1.03] transition duration-300"
+            onError={(e)=>{ e.target.onerror=null; e.target.src="https://placehold.co/400x300/f3f4f6/9ca3af?text=Image+Missing"; }}
+          />
         </div>
-        <button 
-          onClick={()=>handleAddToCart(product.id)}
-          className={`mt-auto w-full text-white py-2 text-sm font-bold rounded transition duration-200 ease-in-out shadow-md flex items-center justify-center gap-2 ${addingToCartId===product.id?'btn-orangered animate-pulse':'bg-black hover:btn-orangered'}`}
-        >
-          {addingToCartId===product.id?'ADDING...':'ADD TO CART'}
-        </button>
+        <div className="p-3 flex flex-col grow">
+          <h3 className="text-sm font-medium text-black mb-1 grow">{product.name.length>60?product.name.substring(0,60)+'...':product.name}</h3>
+          <div className="my-2">
+            <p className="text-xs text-gray-500 line-through">{product.oldPrice}</p>
+            <p className="text-xl font-extrabold text-orangered">{product.price}</p>
+          </div>
+          <button
+            onClick={(e)=>{ e.preventDefault(); handleAddToCart(product.id); }}
+            className={`mt-auto w-full text-white py-2 text-sm font-bold rounded transition duration-200 ease-in-out shadow-md flex items-center justify-center gap-2 ${addingToCartId===product.id?'btn-orangered animate-pulse':'bg-black hover:btn-orangered'}`}
+          >
+            {addingToCartId===product.id?'ADDING...':'ADD TO CART'}
+          </button>
+        </div>
       </div>
-    </div>
-  )
+    </Link>
+  );
 };
 
 // --- Brand Filter Component ---
 const BrandFilter = ({ brands }) => (
-  <div className="py-2 px-4 sm:px-6 lg:px-8"> 
+  <div className="py-2 px-4 sm:px-6 lg:px-8">
     <h3 className="text-lg font-bold mb-3 text-black">Filter by Brand:</h3>
     <div className="flex flex-wrap gap-x-6 gap-y-3">
       {brands.map((brand) => (
         <label key={brand} className="flex items-center cursor-pointer hover:text-orangered transition">
           <input type="checkbox" className="h-4 w-4 text-orangered border-gray-300 rounded focus:ring-orangered"/>
-          <span className="ml-2 text-sm font-medium text-gray-700 hover:text-black">{brand} <span className="text-xs text-gray-400">({automobileProducts.filter(p => p.brand===brand).length})</span></span>
+          <span className="ml-2 text-sm font-medium text-gray-700 hover:text-black">
+            {brand} <span className="text-xs text-gray-400">({automobileProducts.filter(p => p.brand===brand).length})</span>
+          </span>
         </label>
       ))}
     </div>
@@ -90,10 +98,10 @@ const BrandFilter = ({ brands }) => (
 function Automobile() {
   const [addingToCartId, setAddingToCartId] = useState(null);
 
-  const handleAddToCart = (id)=>{
+  const handleAddToCart = (id) => {
     setAddingToCartId(id);
-    setTimeout(()=>setAddingToCartId(null), 500);
-    setTimeout(()=>console.log(`Product ${id} added to cart.`), 200);
+    setTimeout(() => console.log(`Product ${id} added to cart.`), 200);
+    setTimeout(() => setAddingToCartId(null), 500);
   };
 
   return (
@@ -109,7 +117,6 @@ function Automobile() {
         .animate-pulse { animation: pulse 0.5s cubic-bezier(0.4,0,0.6,1) infinite; }
       `}</style>
 
-      {/* Header */}
       <div className="w-full py-8 px-4 sm:px-6 lg:px-8">
         <header className="mb-8 pb-4 border-b border-gray-200 relative">
           <div className="flex items-start gap-4">
@@ -130,16 +137,20 @@ function Automobile() {
             </div>
           </div>
 
-          {/* Brand Filter */}
           <div className="mt-6 border-t pt-4">
             <BrandFilter brands={brands} />
           </div>
         </header>
 
-        {/* Product Grid */}
         <main className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-4 px-4 sm:px-6 lg:px-8">
           {automobileProducts.map((p,i)=>(
-            <AnimatedProductCard key={p.id} product={p} handleAddToCart={handleAddToCart} addingToCartId={addingToCartId} index={i}/>
+            <AnimatedProductCard
+              key={p.id}
+              product={p}
+              handleAddToCart={handleAddToCart}
+              addingToCartId={addingToCartId}
+              index={i}
+            />
           ))}
         </main>
       </div>

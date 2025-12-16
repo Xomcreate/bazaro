@@ -1,5 +1,6 @@
 // File: src/CategoryComponets/Beauty.jsx
 import React, { useState, useEffect, useRef } from "react";
+import { Link } from "react-router-dom";
 
 // --- Beauty & Health Products ---
 const beautyProducts = [
@@ -33,10 +34,7 @@ const AnimatedProductCard = ({ product, handleAddToCart, addingToCartId, index }
   const cardRef = useRef(null);
 
   useEffect(() => {
-    const observer = new IntersectionObserver(
-      ([entry]) => setIsVisible(entry.isIntersecting),
-      { threshold: 0.1 }
-    );
+    const observer = new IntersectionObserver(([entry]) => setIsVisible(entry.isIntersecting), { threshold: 0.1 });
     if (cardRef.current) observer.observe(cardRef.current);
     return () => cardRef.current && observer.unobserve(cardRef.current);
   }, []);
@@ -45,51 +43,53 @@ const AnimatedProductCard = ({ product, handleAddToCart, addingToCartId, index }
   const delayStyle = isVisible ? { transitionDelay: `${index * 50}ms` } : {};
 
   return (
-    <div 
-      ref={cardRef} 
-      style={delayStyle} 
-      className={`group bg-white border border-gray-100 rounded-xl shadow-lg hover:shadow-2xl transition duration-500 transform hover:-translate-y-1 overflow-hidden flex flex-col ${animationClasses}`}
+    <Link
+      to={`/product-detail/${product.id}`}
+      onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
     >
-      <div className="w-full h-36 sm:h-40 md:h-48 overflow-hidden shrink-0 bg-gray-50 flex items-center justify-center">
-        <img src={product.imageUrl} alt={product.name} className="w-full h-full object-cover p-2 group-hover:scale-[1.03] transition duration-300" />
-      </div>
-      <div className="p-3 flex flex-col grow">
-        <h3 className="text-sm font-medium text-black mb-1 grow">
-          {product.name.length > 60 ? product.name.substring(0, 60) + '...' : product.name}
-        </h3>
-        <div className="my-2">
-          <p className="text-xs text-gray-500 line-through">{product.oldPrice}</p>
-          <p className="text-xl font-extrabold text-orangered">{product.price}</p>
+      <div
+        ref={cardRef}
+        style={delayStyle}
+        className={`group bg-white border border-gray-100 rounded-xl shadow-lg hover:shadow-2xl transition duration-500 transform hover:-translate-y-1 overflow-hidden flex flex-col ${animationClasses}`}
+      >
+        <div className="w-full h-36 sm:h-40 md:h-48 overflow-hidden shrink-0 bg-gray-50 flex items-center justify-center">
+          <img
+            src={product.imageUrl}
+            alt={product.name}
+            className="w-full h-full object-cover p-2 group-hover:scale-[1.03] transition duration-300"
+            onError={(e) => { e.target.onerror = null; e.target.src = "https://placehold.co/400x300/f3f4f6/9ca3af?text=Image+Missing"; }}
+          />
         </div>
-        <button
-          onClick={() => handleAddToCart(product.id)}
-          className={`mt-auto w-full text-white py-2 text-sm font-bold rounded transition duration-200 ease-in-out shadow-md flex items-center justify-center gap-2
-            ${addingToCartId === product.id ? 'btn-orangered animate-pulse' : 'bg-black hover:btn-orangered'}`}
-          aria-pressed={addingToCartId === product.id}
-        >
-          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" aria-hidden>
-            <path d="M3 3h2l.4 2M7 13h10l4-8H5.4" stroke="white" strokeWidth="1.4" strokeLinecap="round" strokeLinejoin="round"/>
-            <circle cx="10" cy="20" r="1" fill="white"/>
-            <circle cx="18" cy="20" r="1" fill="white"/>
-          </svg>
-          {addingToCartId === product.id ? 'ADDING...' : 'ADD TO CART'}
-        </button>
+        <div className="p-3 flex flex-col grow">
+          <h3 className="text-sm font-medium text-black mb-1 grow">
+            {product.name.length > 60 ? product.name.substring(0, 60) + '...' : product.name}
+          </h3>
+          <div className="my-2">
+            <p className="text-xs text-gray-500 line-through">{product.oldPrice}</p>
+            <p className="text-xl font-extrabold text-orangered">{product.price}</p>
+          </div>
+          <button
+            onClick={(e) => { e.preventDefault(); handleAddToCart(product.id); }}
+            className={`mt-auto w-full text-white py-2 text-sm font-bold rounded transition duration-200 ease-in-out shadow-md flex items-center justify-center gap-2
+              ${addingToCartId === product.id ? 'btn-orangered animate-pulse' : 'bg-black hover:btn-orangered'}`}
+            aria-pressed={addingToCartId === product.id}
+          >
+            {addingToCartId === product.id ? 'ADDING...' : 'ADD TO CART'}
+          </button>
+        </div>
       </div>
-    </div>
+    </Link>
   );
 };
 
-// --- Brand Filter Component ---
+// --- Brand Filter ---
 const BrandFilter = ({ brands }) => (
   <div className="py-2 px-4 sm:px-6 lg:px-8"> 
     <h3 className="text-lg font-bold mb-3 text-black">Filter by Brand:</h3>
     <div className="flex flex-wrap gap-x-6 gap-y-3">
       {brands.map((brand) => (
         <label key={brand} className="flex items-center cursor-pointer hover:text-orangered transition">
-          <input 
-            type="checkbox" 
-            className="h-4 w-4 text-orangered border-gray-300 rounded focus:ring-orangered" 
-          />
+          <input type="checkbox" className="h-4 w-4 text-orangered border-gray-300 rounded focus:ring-orangered" />
           <span className="ml-2 text-sm font-medium text-gray-700 hover:text-black">
             {brand} <span className="text-xs text-gray-400">({beautyProducts.filter(p => p.brand === brand).length})</span>
           </span>
@@ -138,15 +138,14 @@ function Beauty() {
                 <span className="flex items-center gap-2">
                   <strong className="text-black">{beautyProducts.length}</strong> products
                 </span>
-                <span className="flex items-center gap-2">
-                  <svg width="14" height="14" viewBox="0 0 24 24" fill="none" className="text-orangered opacity-70"><circle cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="1"/></svg>
+                <span className="flex items-center gap-2 text-orangered">
                   Premium Care Products
                 </span>
               </div>
             </div>
           </div>
 
-          {/* Brand filter like Electronics */}
+          {/* Brand filter */}
           <div className="mt-6 border-t pt-4">
             <BrandFilter brands={brands} />
           </div>

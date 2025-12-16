@@ -1,8 +1,9 @@
 // File: src/CategoryComponets/Phone.jsx
 import React, { useState, useEffect, useRef } from "react";
+import { Link, useLocation } from "react-router-dom";
 
 // --- Phone & Tablet Product Data ---
-const products = [
+const phoneProducts = [
   { id: 1, name: 'iPhone 15 Pro Max, 256GB', price: '₦950,000', oldPrice: '₦1,050,000', brand: 'Apple', imageUrl: '/Images/phone-1.jpg' },
   { id: 2, name: 'Samsung Galaxy S23 Ultra', price: '₦850,000', oldPrice: '₦920,000', brand: 'Samsung', imageUrl: '/Images/phone-2.jpg' },
   { id: 3, name: 'iPad Pro 12.9"', price: '₦1,200,000', oldPrice: '₦1,300,000', brand: 'Apple', imageUrl: '/Images/phone-3.jpg' },
@@ -10,10 +11,11 @@ const products = [
   { id: 5, name: 'Xiaomi 13 Ultra', price: '₦450,000', oldPrice: '₦500,000', brand: 'Xiaomi', imageUrl: '/Images/phone-5.jpg' },
 ];
 
-const brands = [...new Set(products.map(p => p.brand))].sort();
-export const phoneProducts = products;
+export const phoneItems = phoneProducts; // optional export
 
-// --- Animated Product Card (same as Electronics) ---
+const brands = [...new Set(phoneProducts.map(p => p.brand))].sort();
+
+// --- Animated Product Card ---
 const AnimatedProductCard = ({ product, handleAddToCart, addingToCartId, index }) => {
   const [isVisible, setIsVisible] = useState(false);
   const cardRef = useRef(null);
@@ -31,25 +33,30 @@ const AnimatedProductCard = ({ product, handleAddToCart, addingToCartId, index }
   const delayStyle = isVisible ? { transitionDelay: `${index * 50}ms`, transitionTimingFunction: 'cubic-bezier(0.4, 0, 0.2, 1)' } : {};
 
   return (
-    <div ref={cardRef} style={delayStyle} className={`group bg-white border border-gray-100 rounded-xl shadow-lg hover:shadow-2xl transition duration-500 transform hover:-translate-y-1 overflow-hidden flex flex-col ${animationClasses}`}>
-      <div className="w-full h-36 sm:h-40 md:h-48 overflow-hidden shrink-0 bg-gray-50 flex items-center justify-center">
-        <img src={product.imageUrl} alt={product.name} className="w-full h-full object-cover p-2 group-hover:scale-[1.03] transition duration-300" />
-      </div>
-      <div className="p-3 flex flex-col grow">
-        <h3 className="text-sm font-medium text-black mb-1 grow">{product.name.length > 60 ? product.name.substring(0, 60) + "..." : product.name}</h3>
-        <div className="my-2">
-          {product.oldPrice && <p className="text-xs text-gray-500 line-through">{product.oldPrice}</p>}
-          <p className="text-xl font-extrabold text-orangered">{product.price}</p>
+    <Link
+      to={`/product-detail/${product.id}`}
+      onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
+    >
+      <div ref={cardRef} style={delayStyle} className={`group bg-white border border-gray-100 rounded-xl shadow-lg hover:shadow-2xl transition duration-500 transform hover:-translate-y-1 overflow-hidden flex flex-col ${animationClasses}`}>
+        <div className="w-full h-36 sm:h-40 md:h-48 overflow-hidden shrink-0 bg-gray-50 flex items-center justify-center">
+          <img src={product.imageUrl} alt={product.name} className="w-full h-full object-cover p-2 group-hover:scale-[1.03] transition duration-300" />
         </div>
-        <button
-          onClick={() => handleAddToCart(product.id)}
-          className={`mt-auto w-full text-white py-2 text-sm font-bold rounded transition duration-200 ease-in-out shadow-md flex items-center justify-center gap-2 ${addingToCartId === product.id ? "btn-orangered animate-pulse" : "bg-black hover:btn-orangered"}`}
-          aria-pressed={addingToCartId === product.id}
-        >
-          ADD TO CART
-        </button>
+        <div className="p-3 flex flex-col grow">
+          <h3 className="text-sm font-medium text-black mb-1 grow">{product.name.length > 60 ? product.name.substring(0, 60) + "..." : product.name}</h3>
+          <div className="my-2">
+            {product.oldPrice && <p className="text-xs text-gray-500 line-through">{product.oldPrice}</p>}
+            <p className="text-xl font-extrabold text-orangered">{product.price}</p>
+          </div>
+          <button
+            onClick={(e) => { e.preventDefault(); handleAddToCart(product.id); }}
+            className={`mt-auto w-full text-white py-2 text-sm font-bold rounded transition duration-200 ease-in-out shadow-md flex items-center justify-center gap-2 ${addingToCartId === product.id ? "btn-orangered animate-pulse" : "bg-black hover:btn-orangered"}`}
+            aria-pressed={addingToCartId === product.id}
+          >
+            ADD TO CART
+          </button>
+        </div>
       </div>
-    </div>
+    </Link>
   );
 };
 
@@ -71,7 +78,7 @@ function Phone() {
           <label key={brand} className="flex items-center cursor-pointer hover:text-orangered transition">
             <input type="checkbox" className="h-4 w-4 text-orangered border-gray-300 rounded focus:ring-orangered" />
             <span className="ml-2 text-sm font-medium text-gray-700 hover:text-black">
-              {brand} <span className="text-xs text-gray-400">({products.filter(p => p.brand === brand).length})</span>
+              {brand} <span className="text-xs text-gray-400">({phoneProducts.filter(p => p.brand === brand).length})</span>
             </span>
           </label>
         ))}
@@ -98,9 +105,6 @@ function Phone() {
             </svg>
             <div className="flex items-start gap-4">
               <div className="px-3 py-1 rounded-full bg-orangered text-white font-semibold text-sm inline-flex items-center gap-2 shadow-sm shrink-0">
-                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" aria-hidden>
-                  <path d="M12 2 L15 8 L22 9 L17 14 L18 21 L12 18 L6 21 L7 14 L2 9 L9 8 Z" fill="white" />
-                </svg>
                 PHONES & TABLETS
               </div>
               <div className="flex-1">
@@ -112,12 +116,9 @@ function Phone() {
                 </p>
                 <div className="mt-4 flex items-center gap-4 text-sm text-gray-600">
                   <span className="flex items-center gap-2">
-                    <strong className="text-black">{products.length}</strong> products
+                    <strong className="text-black">{phoneProducts.length}</strong> products
                   </span>
-                  <span className="flex items-center gap-2">
-                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" className="opacity-70"><circle cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="1"/></svg>
-                    Free shipping on select items
-                  </span>
+                  <span className="flex items-center gap-2">Free shipping on select items</span>
                 </div>
               </div>
             </div>
@@ -133,10 +134,10 @@ function Phone() {
             Featured Phones & Tablets
           </h2>
           <div className="mb-4 text-gray-600">
-            Showing 1 - {products.length} of {products.length} results
+            Showing 1 - {phoneProducts.length} of {phoneProducts.length} results
           </div>
           <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-4">
-            {products.map((product, index) => (
+            {phoneProducts.map((product, index) => (
               <AnimatedProductCard
                 key={product.id}
                 product={product}
