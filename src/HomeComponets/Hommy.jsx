@@ -244,7 +244,7 @@ function BannerCarousel() {
         <div className="w-[95%] md:w-[90%]">
           <div className="mb-4 flex justify-between items-center pb-2 border-b border-gray-200">
             <h2 className="text-2xl md:text-3xl font-extrabold text-gray-900 tracking-tight">
-              ✨ Bazaro Hot Deals & Promotions
+              ✨ ErrandBox Hot Deals & Promotions
             </h2>
             <a href="/deals" className="text-sm font-semibold text-gray-500 hover:text-orange-600 transition">
               View All Deals

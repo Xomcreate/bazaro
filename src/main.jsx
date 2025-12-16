@@ -27,6 +27,14 @@ import Seller from './DashboardComponets/Seller';
 import Users from './DashboardComponets/Users';
 import ForgetPassword from './MainComponents/ForgetPassword';
 import VerifyCode from './MainComponents/VerifyCode';
+import Pricing from './MainComponents/Pricing';
+import Return from './MainComponents/Return';
+import Report from './MainComponents/Report';
+import Delivery from './MainComponents/Delivery';
+import Install from './MainComponents/Install';
+import Warranty from './MainComponents/Warranty';
+import Invoice from './MainComponents/Invoice';
+import FlashSales from './MainComponents/FlashSales';
 
 // import Marketplace from './MainComponents/Marketplace';
 
@@ -65,6 +73,14 @@ function App() {
                        <Route path="/user" element={<Users/>} />
                         <Route path="/forget" element={<ForgetPassword/>} />
                           <Route path="/verify" element={<VerifyCode/>} />
+                            <Route path="/pricing-plans" element={<Pricing/>} />
+                            <Route path="/returns" element={<Return/>} />
+                            <Route path="/report-product" element={<Report/>} />
+                                <Route path="/delivery" element={<Delivery/>} />
+                                 <Route path="/installation" element={<Install/>} />
+                                   <Route path="/warranty-services" element={<Warranty/>} />
+                                   <Route path="/invoice" element={<Invoice/>} />
+                                    <Route path="/flashsale" element={<FlashSales/>} />
                     
                 
         {/* Example for future routes */}

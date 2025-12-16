@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { Link } from "react-router-dom";
 import { Mail, Lock, Eye, EyeOff, ArrowRight, Loader2 } from "lucide-react";
 
 // --- Illustration Component (Refined) ---
@@ -201,12 +202,15 @@ export default function Login() {
 
             {/* Footer */}
             <div className="mt-8 text-center">
-              <p className="text-gray-600">
-                Don’t have an account?{" "}
-                <button className="text-[#FF4500] font-bold hover:underline underline-offset-4">
-                  Register Now
-                </button>
-              </p>
+         <p className="text-gray-600">
+  Don’t have an account?{" "}
+  <Link
+    to="/register"
+    className="text-[#FF4500] font-bold hover:text-red-700 transition duration-150"
+  >
+    Register Here
+  </Link>
+</p>
             </div>
           </div>
         </div>

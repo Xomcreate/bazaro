@@ -147,7 +147,7 @@ export default function HomeC() {
             <CountdownTimer />
           </div>
           <a
-            href="/flash-sales"
+            href="/flashsale"
             className="text-sm md:text-base font-semibold text-white/90 hover:underline"
           >
             View All →
@@ -164,7 +164,7 @@ export default function HomeC() {
         {/* Mobile CTA */}
         <div className="mt-4 text-center sm:hidden">
           <a
-            href="/flash-sales"
+            href="/flashsale"
             className="text-base font-semibold text-orange-600 hover:underline px-4 py-2 border border-orange-600 rounded-lg inline-block"
           >
             See All Deals ({flashSaleProducts.length})

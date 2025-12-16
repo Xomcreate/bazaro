@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { Link } from "react-router-dom";
 import { User, Store, Mail, Lock, Phone, MapPin, DollarSign, ShoppingCart } from "lucide-react";
 
 // --- Illustration Component ---
@@ -248,9 +249,12 @@ export default function RegistrationForm() {
 
             <p className="text-center mt-6 text-sm text-gray-700">
               Already have an account?{" "}
-              <button type="button" className="text-[#FF4500] font-bold hover:text-red-700 transition duration-150">
-                Log In Here
-              </button>
+             <Link
+  to="/login"
+  className="text-[#FF4500] font-bold hover:text-red-700 transition duration-150"
+>
+  Log In Here
+</Link>
             </p>
           </form>
         </div>

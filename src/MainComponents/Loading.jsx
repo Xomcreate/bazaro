@@ -1,98 +1,60 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { motion } from 'framer-motion';
-// NOTE: You must use AnimatePresence in the parent component for the exit prop to work!
-// import { AnimatePresence, motion } from 'framer-motion'; 
 
 function Loading({ onEnter }) {
   const PRIMARY_ACCENT = "#FF4500"; // Orangered
   const BACKGROUND_COLOR = "#FFFFFF"; // Clean white
   const TEXT_COLOR = "#000000"; // Black
 
-  // 1. Variants for the Expanding Wave/Ring Effect (Pulsating)
+  // Automatically call onEnter after 3 seconds (3000ms)
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      onEnter();
+    }, 3000); // 3 seconds
+    return () => clearTimeout(timer);
+  }, [onEnter]);
+
   const ringWaveVariants = {
-    start: (i) => ({
-      scale: 1,
-      opacity: 0,
-    }),
+    start: (i) => ({ scale: 1, opacity: 0 }),
     expand: (i) => ({
       scale: 2.5,
       opacity: 0,
-      transition: {
-        duration: 2.0,
-        ease: "easeOut",
-        repeat: Infinity,
-        delay: i * 0.5, 
-      },
+      transition: { duration: 2, ease: "easeOut", repeat: Infinity, delay: i * 0.5 },
     }),
   };
 
-  // 2. Variants for the Logo (subtle float/breathing)
   const logoFloatVariants = {
     float: {
-        y: [0, -5, 0], 
-        rotate: [0, 0.5, -0.5, 0], 
-        transition: {
-            duration: 4,
-            ease: "easeInOut",
-            repeat: Infinity,
-            repeatType: "reverse"
-        }
-    }
+      y: [0, -5, 0],
+      rotate: [0, 0.5, -0.5, 0],
+      transition: { duration: 4, ease: "easeInOut", repeat: Infinity, repeatType: "reverse" },
+    },
   };
 
-  // 3. Variants for the Scaling/Pulsing Dots (Moved transition outside for clarity)
   const dotScaleVariants = {
     scalePulse: {
-      scale: [1, 1.5, 1], // Scales up and then back down
-      transition: {
-        duration: 0.8,
-        repeat: Infinity,
-        repeatType: "loop",
-        ease: "easeInOut",
-      },
+      scale: [1, 1.5, 1],
+      transition: { duration: 0.8, repeat: Infinity, repeatType: "loop", ease: "easeInOut" },
     },
   };
 
-  // 4. MAIN Content Variants (Crucial addition: 'exit')
   const contentVariants = {
     hidden: { opacity: 0, y: 10 },
-    visible: { 
-        opacity: 1, 
-        y: 0, 
-        transition: { 
-            duration: 0.8, 
-            staggerChildren: 0.1 
-        } 
-    },
-    // 🔥 NEW: The 'Sweet' Exit Transition
-    exit: { 
-        opacity: 0, 
-        scale: 0.95, // Slight scale down on exit
-        transition: { 
-            duration: 0.6, 
-            ease: "easeOut" 
-        } 
-    },
+    visible: { opacity: 1, y: 0, transition: { duration: 0.8, staggerChildren: 0.1 } },
+    exit: { opacity: 0, scale: 0.95, transition: { duration: 0.6, ease: "easeOut" } },
   };
 
   return (
-    // Add the 'exit' prop to the main motion.div
     <motion.div
       className="flex flex-col items-center justify-center h-screen fixed inset-0 z-50"
       style={{ backgroundColor: BACKGROUND_COLOR }}
       variants={contentVariants}
       initial="hidden"
       animate="visible"
-      exit="exit" // This tells Framer Motion how to transition out
+      exit="exit"
     >
-      <motion.div
-        className="flex flex-col items-center"
-      >
-        
-        {/* Pulsating Logo Container - The Catchy Centerpiece */}
+      <motion.div className="flex flex-col items-center">
         <div className="relative mb-12 flex items-center justify-center w-40 h-40">
-          
-          {/* Expanding Wave Rings */}
           {[1, 2].map((i) => (
             <motion.div
               key={i}
@@ -104,37 +66,24 @@ function Loading({ onEnter }) {
               animate="expand"
             />
           ))}
-
-          {/* Bazaro Logo Image (Centerpiece) */}
           <motion.img
             src="/Images/pom1.png"
             alt="Bazaro Logo"
             className="w-24 h-24 rounded-2xl object-cover shadow-2xl relative z-10"
-            style={{ border: `4px solid ${TEXT_COLOR}` }} 
+            style={{ border: `4px solid ${TEXT_COLOR}` }}
             variants={logoFloatVariants}
-            animate="float" 
+            animate="float"
           />
         </div>
 
-        {/* Bazaro Name */}
-        <motion.h1
-          className="text-6xl font-black mb-2 tracking-wide" 
-          style={{ color: PRIMARY_ACCENT }} 
-          variants={contentVariants} // Uses default variants for entrance
-        >
+        <motion.h1 className="text-6xl font-black mb-2 tracking-wide" style={{ color: PRIMARY_ACCENT }} variants={contentVariants}>
           ErrandBox
         </motion.h1>
 
-        {/* Loading Text */}
-        <motion.p
-          className="mt-2 text-xl tracking-wider font-medium"
-          style={{ color: TEXT_COLOR }} 
-          variants={contentVariants} // Uses default variants for entrance
-        >
+        <motion.p className="mt-2 text-xl tracking-wider font-medium" style={{ color: TEXT_COLOR }} variants={contentVariants}>
           Where the world shops.
         </motion.p>
-        
-        {/* Scaling Dot Loader */}
+
         <div className="flex items-center justify-center gap-2 mt-4">
           {[0, 1, 2].map((i) => (
             <motion.div
@@ -143,30 +92,21 @@ function Loading({ onEnter }) {
               style={{ backgroundColor: PRIMARY_ACCENT }}
               variants={dotScaleVariants}
               animate="scalePulse"
-              // Stagger the delay for a continuous pulse wave effect
-              transition={{ ...dotScaleVariants.scalePulse.transition, delay: i * 0.2 }} 
+              transition={{ ...dotScaleVariants.scalePulse.transition, delay: i * 0.2 }}
             />
           ))}
         </div>
 
-        {/* Catchy Enter Button */}
         <motion.button
           className="mt-12 px-10 py-4 rounded-full font-extrabold text-white shadow-2xl transition duration-300"
           onClick={onEnter}
-          style={{ 
-            backgroundColor: PRIMARY_ACCENT, 
-            boxShadow: `0 0 20px ${PRIMARY_ACCENT}80` 
-          }}
-          whileHover={{ 
-            scale: 1.1, 
-            boxShadow: `0 0 30px ${PRIMARY_ACCENT}` 
-          }}
+          style={{ backgroundColor: PRIMARY_ACCENT, boxShadow: `0 0 20px ${PRIMARY_ACCENT}80` }}
+          whileHover={{ scale: 1.1, boxShadow: `0 0 30px ${PRIMARY_ACCENT}` }}
           whileTap={{ scale: 0.95 }}
-          variants={contentVariants} // Uses default variants for entrance
+          variants={contentVariants}
         >
           START SHOPPING NOW
         </motion.button>
-
       </motion.div>
     </motion.div>
   );

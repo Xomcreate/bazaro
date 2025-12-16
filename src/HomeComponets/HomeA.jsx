@@ -16,9 +16,9 @@ const CATEGORIES = [
 ];
 
 const SLIDES = [
-  { url: "/Images/xom1.jpeg", title: "Big Tech Sale", subtitle: "Up to 50% off Laptops & Phones" },
-  { url: "/Images/xom2.jpeg", title: "Weekend Awoof Deals", subtitle: "Limited time flash sales, don't miss out!" },
-  { url: "/Images/xom3.jpeg", title: "Fashion Trends", subtitle: "New arrivals in Ankara and Lace styles" },
+  { url: "/Images/xom1.png", title: "Big Tech Sale", subtitle: "Up to 50% off Laptops & Phones" },
+  { url: "/Images/xom2.png", title: "Weekend Awoof Deals", subtitle: "Limited time flash sales, don't miss out!" },
+  { url: "/Images/xom3.png", title: "Fashion Trends", subtitle: "New arrivals in Ankara and Lace styles" },
 ];
 
 const BEST_SELLERS = [
@@ -106,7 +106,7 @@ const HeroSlider = () => {
   };
 
   const MiniPromoTile = ({ icon: Icon, title, subtitle, colorClass }) => (
-    <a href="#" className="bg-white rounded-lg shadow-md p-3 flex items-center gap-3 hover:shadow-lg transition-shadow">
+    <a  className="bg-white rounded-lg shadow-md p-3 flex items-center gap-3 hover:shadow-lg transition-shadow">
       <div className={`h-12 w-12 rounded-md ${colorClass} grid place-items-center text-white`}><Icon className="h-6 w-6" /></div>
       <div>
         <p className="text-sm text-gray-500">{title}</p>
