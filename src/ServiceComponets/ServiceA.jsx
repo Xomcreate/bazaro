@@ -31,7 +31,7 @@ function ServiceA() {
             transition: 'background-color 0.3s, transform 0.2s',
             boxShadow: '0 4px 15px rgba(255, 69, 0, 0.4)',
           }}
-          onClick={() => navigate('/login')} // <-- Navigate to login page
+          onClick={() => navigate('/sell')} // <-- Navigate to login page
         >
           Explore How ErrandBox Works
         </button>

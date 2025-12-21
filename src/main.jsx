@@ -37,6 +37,9 @@ import Invoice from './MainComponents/Invoice';
 import FlashSales from './MainComponents/FlashSales';
 import ProductDetailPage from './MainComponents/ProductDetail';
 import ServiceDetail from './MainComponents/ServiceDetail';
+import ShopDetail from './MainComponents/ShopDetail';
+import SellerDetailPage from './MainComponents/SellerDetailPage';
+import Vendor from './MainComponents/Vendor';
 
 // import Marketplace from './MainComponents/Marketplace';
 
@@ -83,8 +86,11 @@ function App() {
                                    <Route path="/warranty-services" element={<Warranty/>} />
                                    <Route path="/invoice" element={<Invoice/>} />
                                     <Route path="/flashsale" element={<FlashSales/>} />
+                                            <Route path="/shop/:shopId" element={<ShopDetail />} />
                                        <Route path="/product-detail/:id" element={<ProductDetailPage/>} />
                                         <Route path="/service-detail/:id" element={<ServiceDetail/>} />
+                                         <Route path="/seller/:id" element={<SellerDetailPage/>} />
+                                              <Route path="/vendors" element={<Vendor/>} />
                     
                 
         {/* Example for future routes */}

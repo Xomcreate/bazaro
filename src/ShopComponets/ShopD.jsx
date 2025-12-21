@@ -1,4 +1,5 @@
-import React from "react";
+import React, { useState } from "react";
+import { useNavigate } from "react-router-dom";
 
 const COLOR_ORANGERED = "#FF4500";
 const COLOR_BLACK = "#1F2937";
@@ -39,14 +40,35 @@ const products = [
 ];
 
 export default function ShopD() {
+  const navigate = useNavigate();
+  const [wishlist, setWishlist] = useState(() => {
+    const saved = localStorage.getItem("wishlist");
+    return saved ? JSON.parse(saved) : [];
+  });
+  const [message, setMessage] = useState(""); // for inline success message
+
+  const handleQuickView = (product) => {
+    navigate(`/product/${product.id}`, { state: { product } });
+  };
+
+  const handleAddToWishlist = (product) => {
+    if (!wishlist.some((p) => p.id === product.id)) {
+      const newWishlist = [...wishlist, product];
+      setWishlist(newWishlist);
+      localStorage.setItem("wishlist", JSON.stringify(newWishlist));
+      setMessage(`${product.name} added to wishlist!`);
+    } else {
+      setMessage(`${product.name} is already in your wishlist.`);
+    }
+
+    // Hide message after 3 seconds
+    setTimeout(() => setMessage(""), 3000);
+  };
+
   return (
-    <div
-      className="w-full bg-gray-50 py-16"
-      style={{ fontFamily: "Inter, sans-serif" }}
-    >
+    <div className="w-full bg-gray-50 py-16" style={{ fontFamily: "Inter, sans-serif" }}>
       <div className="max-w-7xl mx-auto px-6 text-center">
-        {/* HEADER TEXT */}
-        <div className="mb-10">
+        <div className="mb-6">
           <h2 className="text-4xl font-extrabold mb-3" style={{ color: COLOR_BLACK }}>
             Product Listings
           </h2>
@@ -55,15 +77,18 @@ export default function ShopD() {
           </p>
         </div>
 
-        {/* PRODUCT GRID */}
+        {/* Inline message */}
+        {message && (
+          <div className="mb-6 text-green-700 font-semibold text-lg">
+            {message}
+          </div>
+        )}
+
         <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-8">
           {products.map((item) => (
             <div
               key={item.id}
-              className="
-                relative bg-white p-4 rounded-2xl shadow-md hover:shadow-xl 
-                transition-all duration-300 cursor-pointer text-center
-              "
+              className="relative bg-white p-4 rounded-2xl shadow-md hover:shadow-xl transition-all duration-300 text-center"
             >
               {/* Badge */}
               <div
@@ -75,11 +100,7 @@ export default function ShopD() {
 
               {/* Image */}
               <div className="w-full h-48 rounded-xl overflow-hidden mb-4 mx-auto">
-                <img
-                  src={item.img}
-                  alt={item.name}
-                  className="w-full h-full object-cover"
-                />
+                <img src={item.img} alt={item.name} className="w-full h-full object-cover" />
               </div>
 
               {/* Product Name */}
@@ -96,19 +117,15 @@ export default function ShopD() {
               {/* Action Buttons */}
               <div className="flex flex-col sm:flex-row gap-2 justify-center">
                 <button
-                  className="
-                    flex-1 py-2 font-semibold rounded-xl transition
-                    hover:scale-105 shadow-md
-                  "
+                  onClick={() => handleQuickView(item)}
+                  className="flex-1 py-2 font-semibold rounded-xl transition hover:scale-105 shadow-md"
                   style={{ backgroundColor: COLOR_ORANGERED, color: "white" }}
                 >
                   Quick View
                 </button>
                 <button
-                  className="
-                    flex-1 py-2 font-semibold rounded-xl border-2 border-gray-300
-                    hover:bg-gray-100 transition
-                  "
+                  onClick={() => handleAddToWishlist(item)}
+                  className="flex-1 py-2 font-semibold rounded-xl border-2 border-gray-300 hover:bg-gray-100 transition"
                 >
                   Wishlist
                 </button>

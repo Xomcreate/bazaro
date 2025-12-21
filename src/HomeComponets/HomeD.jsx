@@ -85,9 +85,9 @@ function HomeD() {
         {/* Header like HomeC Flash Sales */}
         <div className="flex items-center justify-between mb-3 bg-linear-to-r from-orange-500 to-orange-400 text-white px-4 py-3 rounded-t-xl shadow-md">
           <span className="text-2xl md:text-3xl font-extrabold">🔥 Deals of the Day</span>
-          <a href="/deals-of-the-day" className="text-sm md:text-base font-semibold text-white/90 hover:underline">
+          {/* <a href="/deals-of-the-day" className="text-sm md:text-base font-semibold text-white/90 hover:underline">
             View More →
-          </a>
+          </a> */}
         </div>
 
         {/* Deal Grid: 4 columns × 3 rows */}

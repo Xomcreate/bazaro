@@ -1,4 +1,5 @@
 import React from "react";
+import { useNavigate } from "react-router-dom";
 
 const COLOR_ORANGERED = "#FF4500";
 const COLOR_BLACK = "#1F2937";
@@ -39,19 +40,18 @@ const products = [
 ];
 
 export default function ShopC() {
+  const navigate = useNavigate();
+
+  const handleViewDeal = (product) => {
+    navigate(`/product/${product.id}`, { state: { product } });
+  };
+
   return (
-    <div
-      className="w-full bg-gray-50 py-16"
-      style={{ fontFamily: "Inter, sans-serif" }}
-    >
+    <div className="w-full bg-gray-50 py-16" style={{ fontFamily: "Inter, sans-serif" }}>
       <div className="max-w-7xl mx-auto px-6 text-center">
-        
         {/* HEADER TEXT */}
         <div className="mb-10">
-          <h2
-            className="text-4xl font-extrabold mb-3"
-            style={{ color: COLOR_BLACK }}
-          >
+          <h2 className="text-4xl font-extrabold mb-3" style={{ color: COLOR_BLACK }}>
             Featured Products & Promotions
           </h2>
           <p className="text-gray-600 text-lg">
@@ -64,53 +64,31 @@ export default function ShopC() {
           {products.map((item) => (
             <div
               key={item.id}
-              className="
-                bg-white p-4 rounded-2xl shadow-md hover:shadow-xl 
-                transition-all duration-300 cursor-pointer relative text-center
-              "
+              className="bg-white p-4 rounded-2xl shadow-md hover:shadow-xl transition-all duration-300 cursor-pointer relative text-center"
             >
-              
               {/* Badge */}
-              <div
-                className="absolute top-2 left-1/2 -translate-x-1/2 px-3 py-1 text-xs font-bold rounded-full"
-                style={{ backgroundColor: COLOR_ORANGERED, color: "white" }}
-              >
+              <div className="absolute top-2 left-1/2 -translate-x-1/2 px-3 py-1 text-xs font-bold rounded-full" style={{ backgroundColor: COLOR_ORANGERED, color: "white" }}>
                 {item.tag}
               </div>
 
               {/* Image */}
               <div className="w-full h-48 rounded-xl overflow-hidden mb-4 mx-auto">
-                <img
-                  src={item.img}
-                  alt={item.name}
-                  className="w-full h-full object-cover"
-                />
+                <img src={item.img} alt={item.name} className="w-full h-full object-cover" />
               </div>
 
               {/* Product Name */}
-              <h3 className="font-bold text-lg text-gray-800 mb-2">
-                {item.name}
-              </h3>
+              <h3 className="font-bold text-lg text-gray-800 mb-2">{item.name}</h3>
 
               {/* Prices */}
               <div className="mb-4">
-                <p
-                  className="text-xl font-bold"
-                  style={{ color: COLOR_ORANGERED }}
-                >
-                  {item.price}
-                </p>
-                <p className="text-sm text-gray-400 line-through">
-                  {item.oldPrice}
-                </p>
+                <p className="text-xl font-bold" style={{ color: COLOR_ORANGERED }}>{item.price}</p>
+                <p className="text-sm text-gray-400 line-through">{item.oldPrice}</p>
               </div>
 
-              {/* Button */}
+              {/* View Deal Button */}
               <button
-                className="
-                  w-full py-2 font-semibold rounded-xl transition
-                  hover:scale-105 shadow-md
-                "
+                onClick={() => handleViewDeal(item)}
+                className="w-full py-2 font-semibold rounded-xl transition hover:scale-105 shadow-md"
                 style={{ backgroundColor: COLOR_ORANGERED, color: "white" }}
               >
                 View Deal

@@ -193,7 +193,7 @@ const BannerItem = ({ banner, index }) => {
         transitionDelay: `${index * 50}ms`,
       }}
     >
-      <a href={`/deals/${slug}`} className="absolute inset-0 p-4 md:p-6 flex flex-col justify-end z-10">
+      <a  className="absolute inset-0 p-4 md:p-6 flex flex-col justify-end z-10">
         <div className="absolute inset-0">
           {GraphicComponent && <GraphicComponent />}
         </div>
@@ -223,18 +223,18 @@ function BannerCarousel() {
   }, []);
 
   const promotionBanners = [
-    { title: "Do Pass Yourself", subtitle: "WITH UP TO 60% OFF!", slug: "do-pass-yourself-sale", style: { bgColor: "#1A202C", titleColor: "#F7FAFC", subtitleColor: "#CBD5E0" }, graphic: () => <DiscountShape color1="#3182CE" color2="#F7FAFC" percentage="60%" text="OFF" /> },
-    { title: "Deal of the Month", subtitle: "Don't Miss Out - Huge Savings!", slug: "deal-of-the-month", style: { bgColor: "#ED64A6", titleColor: "#FFFFFF", subtitleColor: "#FED7E2" }, graphic: () => <StarBurst color1="#F687B3" color2="#FFE0F0" /> },
-    { title: "Clearance Sales", subtitle: "Up to 80% Off Everything!", slug: "clearance-sales", style: { bgColor: "#F6AD55", titleColor: "#FFFFFF", subtitleColor: "#FFFBEB" }, graphic: () => <PriceTag color1="#FBD38D" color2="#FFFFFF" percentage="80%" /> },
-    { title: "ErrandBox Delivery", subtitle: "Fast & Free Shipping on Orders!", slug: "baz-delivery", style: { bgColor: "#38A169", titleColor: "#FFFFFF", subtitleColor: "#C6F6D5" }, graphic: () => <DeliveryTruck color="#81C784" /> },
-    { title: "Buy 2 Get N1,000 Off", subtitle: "Mix & Match Your Favorites!", slug: "buy2-get1k-off", style: { bgColor: "#667EEA", titleColor: "#FFFFFF", subtitleColor: "#EBF4FF" }, graphic: () => <InterlockingCircles color1="#8DA4F7" color2="#B3C5FF" text1="2" text2="OFF" /> },
-    { title: "ErrandBox Force", subtitle: "Join Today & Unlock Exclusive Perks!", slug: "ErrandBox-force", style: { bgColor: "#D53F8C", titleColor: "#FFFFFF", subtitleColor: "#FBB6CE" }, graphic: () => <AbstractFlow color="#F6AD55" /> },
-    { title: "Extra 10% At Checkout", subtitle: "Limited Time Offer - Shop Now!", slug: "extra-10-checkout", style: { bgColor: "#C53030", titleColor: "#FFFFFF", subtitleColor: "#FED7D7" }, graphic: () => <DynamicPercent color1="#E53E3E" color2="#FFFFFF" percentage="10" /> },
-    { title: "Deals Reloaded", subtitle: "Gaming Gear & Electronics!", slug: "deals-reloaded", style: { bgColor: "#2B6CB0", titleColor: "#FFFFFF", subtitleColor: "#E0F2F7" }, graphic: () => <GameController color="#63B3ED" /> },
-    { title: "Flash Sale", subtitle: "Ending Soon - Grab It Fast!", slug: "flash-sale", style: { bgColor: "#ECC94B", titleColor: "#A0522D", subtitleColor: "#6B46C1" }, graphic: () => <LightningBolt color="#F6E05E" /> },
-    { title: "New Arrivals", subtitle: "Discover What's Fresh!", slug: "new-arrivals", style: { bgColor: "#6B46C1", titleColor: "#FFFFFF", subtitleColor: "#E9D8FD" }, graphic: () => <NewArrivalsIcon color="#9F7AEA" /> },
-    { title: "Weekend Vibes", subtitle: "Shop & Relax All Weekend!", slug: "weekend-vibes", style: { bgColor: "#805AD5", titleColor: "#FFFFFF", subtitleColor: "#EDE9FE" }, graphic: () => <SunIcon color="#D6BCFA" /> },
-    { title: "Limited Stock", subtitle: "Hurry Before They're Gone!", slug: "limited-stock", style: { bgColor: "#DD6B20", titleColor: "#FFFFFF", subtitleColor: "#FEEBCF" }, graphic: () => <WarningTriangle color="#F6AD55" /> },
+    { title: "Do Pass Yourself", subtitle: "WITH UP TO 60% OFF!", slug: "", style: { bgColor: "#1A202C", titleColor: "#F7FAFC", subtitleColor: "#CBD5E0" }, graphic: () => <DiscountShape color1="#3182CE" color2="#F7FAFC" percentage="60%" text="OFF" /> },
+    { title: "Deal of the Month", subtitle: "Don't Miss Out - Huge Savings!", slug: "", style: { bgColor: "#ED64A6", titleColor: "#FFFFFF", subtitleColor: "#FED7E2" }, graphic: () => <StarBurst color1="#F687B3" color2="#FFE0F0" /> },
+    { title: "Clearance Sales", subtitle: "Up to 80% Off Everything!", slug: "", style: { bgColor: "#F6AD55", titleColor: "#FFFFFF", subtitleColor: "#FFFBEB" }, graphic: () => <PriceTag color1="#FBD38D" color2="#FFFFFF" percentage="80%" /> },
+    { title: "ErrandBox Delivery", subtitle: "Fast & Free Shipping on Orders!", slug: "delivery", style: { bgColor: "#38A169", titleColor: "#FFFFFF", subtitleColor: "#C6F6D5" }, graphic: () => <DeliveryTruck color="#81C784" /> },
+    { title: "Buy 2 Get N1,000 Off", subtitle: "Mix & Match Your Favorites!", slug: "", style: { bgColor: "#667EEA", titleColor: "#FFFFFF", subtitleColor: "#EBF4FF" }, graphic: () => <InterlockingCircles color1="#8DA4F7" color2="#B3C5FF" text1="2" text2="OFF" /> },
+    { title: "ErrandBox Force", subtitle: "Join Today & Unlock Exclusive Perks!", slug: "", style: { bgColor: "#D53F8C", titleColor: "#FFFFFF", subtitleColor: "#FBB6CE" }, graphic: () => <AbstractFlow color="#F6AD55" /> },
+    { title: "Extra 10% At Checkout", subtitle: "Limited Time Offer - Shop Now!", slug: "", style: { bgColor: "#C53030", titleColor: "#FFFFFF", subtitleColor: "#FED7D7" }, graphic: () => <DynamicPercent color1="#E53E3E" color2="#FFFFFF" percentage="10" /> },
+    { title: "Deals Reloaded", subtitle: "Gaming Gear & Electronics!", slug: "", style: { bgColor: "#2B6CB0", titleColor: "#FFFFFF", subtitleColor: "#E0F2F7" }, graphic: () => <GameController color="#63B3ED" /> },
+    { title: "Flash Sale", subtitle: "Ending Soon - Grab It Fast!", slug: "flashsale", style: { bgColor: "#ECC94B", titleColor: "#A0522D", subtitleColor: "#6B46C1" }, graphic: () => <LightningBolt color="#F6E05E" /> },
+    { title: "New Arrivals", subtitle: "Discover What's Fresh!", slug: "", style: { bgColor: "#6B46C1", titleColor: "#FFFFFF", subtitleColor: "#E9D8FD" }, graphic: () => <NewArrivalsIcon color="#9F7AEA" /> },
+    { title: "Weekend Vibes", subtitle: "Shop & Relax All Weekend!", slug: "", style: { bgColor: "#805AD5", titleColor: "#FFFFFF", subtitleColor: "#EDE9FE" }, graphic: () => <SunIcon color="#D6BCFA" /> },
+    { title: "Limited Stock", subtitle: "Hurry Before They're Gone!", slug: "", style: { bgColor: "#DD6B20", titleColor: "#FFFFFF", subtitleColor: "#FEEBCF" }, graphic: () => <WarningTriangle color="#F6AD55" /> },
   ];
 
   return (

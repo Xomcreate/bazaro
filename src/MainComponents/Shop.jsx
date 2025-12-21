@@ -1,6 +1,6 @@
 import React from 'react'
 import ShopA from '../ShopComponets/ShopA'
-import ShopB from '../ShopComponets/ShopB'
+// import ShopB from '../ShopComponets/ShopB'
 import ShopC from '../ShopComponets/ShopC'
 import ShopD from '../ShopComponets/ShopD'
 import ShopE from '../ShopComponets/ShopE'
@@ -12,7 +12,7 @@ function Shop() {
     <>
     <div>
       <ShopA/>
-      <ShopB/>
+      {/* <ShopB/> */}
       <ShopC/>
       <ShopD/>
       <ShopE/>

@@ -25,7 +25,7 @@ function MarketA() {
 
   const handleStartShopping = () => {
     // Route to login first
-    navigate('/login');
+    navigate('/categories');
   };
 
   return (

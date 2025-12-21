@@ -24,9 +24,9 @@ const FeaturedDealCard = () => (
         <p className="text-2xl font-extrabold" style={{ color: COLOR_ORANGERED }}>₦29,999</p>
         <p className="text-sm line-through text-gray-400">₦45,000</p>
       </div>
-      <button className="px-5 py-2 text-sm font-semibold rounded-full shadow-md transition hover:scale-105" style={{ backgroundColor: COLOR_ORANGERED, color: COLOR_BLACK }}>
+      {/* <button className="px-5 py-2 text-sm font-semibold rounded-full shadow-md transition hover:scale-105" style={{ backgroundColor: COLOR_ORANGERED, color: COLOR_BLACK }}>
         View Deal
-      </button>
+      </button> */}
     </div>
   </div>
 );
@@ -39,7 +39,7 @@ export default function ShopA() {
 
   const handleRoute = (path) => {
     if (!isLoggedIn) {
-      navigate('/login'); // Redirect to login if not logged in
+      navigate('/categories'); // Redirect to login if not logged in
     } else {
       navigate(path); // Otherwise go to intended page
     }

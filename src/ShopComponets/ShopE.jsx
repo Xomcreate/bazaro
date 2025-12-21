@@ -1,4 +1,5 @@
 import React from "react";
+import { Link } from "react-router-dom";
 
 const COLOR_ORANGERED = "#FF4500";
 const COLOR_BLACK = "#1F2937";
@@ -6,6 +7,7 @@ const COLOR_BLACK = "#1F2937";
 // Example sellers data
 const sellers = [
   {
+    id: 1,
     name: "Bazaro Shop",
     location: "Lagos, Nigeria",
     verified: true,
@@ -15,6 +17,7 @@ const sellers = [
     shippingInfo: "Ships to all major cities in Nigeria. Standard and express delivery.",
   },
   {
+    id: 2,
     name: "Jiji Electronics",
     location: "Abuja, Nigeria",
     verified: false,
@@ -24,6 +27,7 @@ const sellers = [
     shippingInfo: "Nationwide delivery with express available.",
   },
   {
+    id: 3,
     name: "Mega Deals Store",
     location: "Port Harcourt, Nigeria",
     verified: true,
@@ -50,9 +54,9 @@ export default function ShopE() {
 
         {/* Sellers Grid */}
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-          {sellers.map((seller, index) => (
+          {sellers.map((seller) => (
             <div
-              key={index}
+              key={seller.id}
               className="bg-white p-8 rounded-2xl shadow-md space-y-6 text-center"
             >
               {/* Seller Info */}
@@ -101,12 +105,13 @@ export default function ShopE() {
               </div>
 
               {/* CTA */}
-              <button
-                className="mt-4 w-full py-3 font-semibold rounded-xl shadow-md transition hover:scale-105"
+              <Link
+                to={`/seller/${seller.id}`}
+                className="mt-4 w-full py-3 font-semibold rounded-xl shadow-md transition hover:scale-105 inline-block"
                 style={{ backgroundColor: COLOR_ORANGERED, color: "white" }}
               >
-                Contact Seller
-              </button>
+                View Seller
+              </Link>
             </div>
           ))}
         </div>
